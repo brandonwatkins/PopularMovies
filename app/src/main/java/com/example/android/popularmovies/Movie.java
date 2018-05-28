@@ -1,42 +1,109 @@
 package com.example.android.popularmovies;
 
-public class Movie {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    private String title;
-    private String url;
-    private String synopsis;
+public class Movie implements Parcelable {
+
+    private Long movieId;
+    private String originalTitle;
+    private String moviePosterUrl;
+    private String plotSynopsis;
+    private Double userRating;
     private String releaseDate;
-    private int rating;
 
-    public Movie(String movieUrl, String movieTitle, String movieSynopsis, String movieReleaseDate) {
-        this.url = movieUrl;
-        this.title = movieTitle;
-        this.synopsis = movieSynopsis;
-        this.releaseDate = movieReleaseDate;
+    public Movie() {
+
     }
 
-    public String getTitle() {
-        return title;
+    public Movie(String name, String imageUrl) {
+        this.originalTitle = originalTitle;
+        this.moviePosterUrl = moviePosterUrl;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public Movie(String title, String posterUrl, String synopsis,
+                 Double rating, String date) {
+        this.originalTitle = title;
+        this.moviePosterUrl = posterUrl;
+        this.plotSynopsis = synopsis;
+        this.userRating = rating;
+        this.releaseDate = date;
     }
 
-    public String getUrl() {
-        return url;
+    private Movie(Parcel in){
+        originalTitle = in.readString();
+        moviePosterUrl = in.readString();
+        plotSynopsis = in.readString();
+        userRating = in.readDouble();
+        releaseDate = in.readString();
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(originalTitle);
+        parcel.writeString(moviePosterUrl);
+        parcel.writeString(plotSynopsis);
+        parcel.writeDouble(userRating);
+        parcel.writeString(releaseDate);
     }
 
-    public String getSynopsis() {
-        return synopsis;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
+    public final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel parcel) {
+            return new Movie(parcel);
+        }
+
+        @Override
+        public Movie[] newArray(int i) {
+            return new Movie[i];
+        }
+
+    };
+
+
+    public Long getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(Long movieId) {
+        this.movieId = movieId;
+    }
+
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
+    }
+
+    public String getMoviePosterUrl() {
+        return moviePosterUrl;
+    }
+
+    public void setMoviePosterUrl(String moviePosterUrl) {
+        this.moviePosterUrl = moviePosterUrl;
+    }
+
+    public String getPlotSynopsis() {
+        return plotSynopsis;
+    }
+
+    public void setPlotSynopsis(String plotSynopsis) {
+        this.plotSynopsis = plotSynopsis;
+    }
+
+    public Double getUserRating() {
+        return userRating;
+    }
+
+    public void setUserRating(Double userRating) {
+        this.userRating = userRating;
     }
 
     public String getReleaseDate() {
@@ -45,13 +112,5 @@ public class Movie {
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
     }
 }
