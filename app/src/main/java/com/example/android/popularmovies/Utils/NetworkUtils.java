@@ -18,11 +18,11 @@ public final class NetworkUtils {
     private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
 
 
-    private static final String MOVIE_URL = "https://andfun-weather.udacity.com/staticweather";
+    private static final String MOVIE_URL = "http://api.themoviedb.org/3/movie";
     private static final String API_KEY = "84e8c76a996104eafdee78fadd6e95db";
 
 
-    final static String SORT_PARAM = "sort_by";
+    final static String SORT_PARAM = "";
     final static String API_PARAM = "api_key";
 
 
@@ -64,7 +64,7 @@ public final class NetworkUtils {
      */
     public static URL buildUrl(String sortQuery) {
         Uri builtUri = Uri.parse(MOVIE_URL).buildUpon()
-                .appendQueryParameter(SORT_PARAM, sortQuery)
+                .appendPath(sortQuery)
                 .appendQueryParameter(API_PARAM, API_KEY)
                 .build();
 

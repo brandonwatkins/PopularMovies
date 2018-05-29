@@ -1,14 +1,18 @@
 package com.example.android.popularmovies;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.GridView;
 
-import com.example.android.popularmovies.Tasks.FindMoviesTask;
 import com.example.android.popularmovies.Tasks.RetrieveMoviesTask;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,12 +21,39 @@ public class MainActivity extends AppCompatActivity {
     private static final String POPULAR_KEY = "popular";
     private static final String TOP_RATED_KEY = "top_rated";
 
-    MovieAdapter mMovieAdapter = new MovieAdapter(this);
+    private GridView gridView;
+    private MovieAdapter mMovieAdapter;
+    public ArrayList<Movie> movies = new ArrayList<Movie>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        gridView = (GridView) findViewById(R.id.gridView);
+        mMovieAdapter = new MovieAdapter(this);
+
+        getMostPopular();
+
+        gridView.setAdapter(mMovieAdapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
+                Movie movie = movies.get(position);
+
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                intent.putExtra(MOVIE_KEY, movie);
+
+
+
+                // This tells the GridView to redraw itself
+                // in turn calling your MovieAdapter's getView method again for each cell
+               // movieAdapter.notifyDataSetChanged();
+            }
+
+        });
 
 /*        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
@@ -65,13 +96,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "Fetching Popular");
         retrieveMoviesTask.execute(POPULAR_KEY);
         //getSupportActionBar().setTitle(R.string.popular);
-    }
-
-    @Override
-    public void onClick(Movie movie) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(MOVIE_KEY, movie);
-        startActivity(intent);
     }
 
 }

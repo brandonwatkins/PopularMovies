@@ -8,8 +8,6 @@ import com.example.android.popularmovies.MovieAdapter;
 import com.example.android.popularmovies.Utils.JSONUtils;
 import com.example.android.popularmovies.Utils.NetworkUtils;
 
-import org.json.JSONException;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
