@@ -23,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private GridView gridView;
     private MovieAdapter mMovieAdapter;
-    public ArrayList<Movie> movies = new ArrayList<Movie>();
-
+    public ArrayList<Movie> movies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         gridView = (GridView) findViewById(R.id.gridView);
-        mMovieAdapter = new MovieAdapter(this);
+
+        movies = new ArrayList<>();
+        mMovieAdapter = new MovieAdapter(this, movies);
 
         getMostPopular();
 

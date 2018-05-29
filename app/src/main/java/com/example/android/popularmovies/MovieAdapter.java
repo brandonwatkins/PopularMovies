@@ -20,13 +20,22 @@ public class MovieAdapter extends BaseAdapter {
     private Context mContext;
     private List<Movie> mMovies;
 
-    public MovieAdapter(Context context) {
+    public MovieAdapter(Context context, List<Movie> movie) {
         this.mContext = context;
+        this.mMovies = movie;
     }
 
     @Override
     public int getCount() {
-       return mMovies.size();
+
+        if ( mMovies.size() != 0 ) {
+            int size = this.mMovies.size();
+            Log.d(LOG_TAG, "getCount() : " + String.valueOf(size));
+            return size; // >> 20
+        } else {
+            return 0;
+        }
+       //return mMovies.size();
     }
 
     @Override
@@ -42,13 +51,14 @@ public class MovieAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.poster);
         LayoutInflater layoutInflater;
 
         if (convertView == null) {
             layoutInflater = LayoutInflater.from(mContext);
             convertView = layoutInflater.inflate(R.layout.movie_poster, null);
         }
+
+        ImageView imageView = convertView.findViewById(R.id.poster);
 
         Picasso.with(mContext)
                 .load(mMovies.get(position).getMoviePosterUrl())
