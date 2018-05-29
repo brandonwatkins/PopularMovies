@@ -28,14 +28,14 @@ public class MovieAdapter extends BaseAdapter {
     @Override
     public int getCount() {
 
-        if ( mMovies.size() != 0 ) {
+/*        if ( mMovies.size() != 0 ) {
             int size = this.mMovies.size();
             Log.d(LOG_TAG, "getCount() : " + String.valueOf(size));
             return size; // >> 20
         } else {
             return 0;
-        }
-       //return mMovies.size();
+        }*/
+       return mMovies.size();
     }
 
     @Override
