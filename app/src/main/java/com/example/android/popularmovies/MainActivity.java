@@ -1,23 +1,23 @@
 package com.example.android.popularmovies;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toolbar;
 
 import com.example.android.popularmovies.Tasks.FindMoviesTask;
-import com.example.android.popularmovies.Tasks.HighestRatedMoviesTask;
+import com.example.android.popularmovies.Tasks.RetrieveMoviesTask;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final String MOVIE_KEY = "movie_key";
+    private static final String POPULAR_KEY = "popular";
+    private static final String TOP_RATED_KEY = "top_rated";
 
-
+    MovieAdapter mMovieAdapter = new MovieAdapter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,16 +54,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getHighestRated() {
-        HighestRatedMoviesTask getHighestRatedMoviesTask = new getHighestRatedMoviesTask();
+        RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mMovieAdapter);
         Log.d(LOG_TAG, "Fetching Highest Rated");
-        getHighestRatedMoviesTask.execute();
+        retrieveMoviesTask.execute(TOP_RATED_KEY);
         //getSupportActionBar().setTitle(R.string.highest_rated);
     }
 
     private void getMostPopular() {
-        MostPopularMoviesTask getMostPopularMoviesTask = new getMostPopularMoviesTask();
+        RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mMovieAdapter);
         Log.d(LOG_TAG, "Fetching Popular");
-        getMostPopularMoviesTask.execute();
+        retrieveMoviesTask.execute(POPULAR_KEY);
         //getSupportActionBar().setTitle(R.string.popular);
     }
 

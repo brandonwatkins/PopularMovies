@@ -16,7 +16,7 @@ public class JSONUtils {
     private static final String LOG_TAG = JSONUtils.class.getSimpleName();
 
 
-    private List<Movie> parseMoviesJSON (String JSONString) {
+    public List<Movie> parseMoviesJSON (String JSONString) {
 
         try {
 

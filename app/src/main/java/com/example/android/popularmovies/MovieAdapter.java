@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -21,9 +20,8 @@ public class MovieAdapter extends BaseAdapter {
     private Context mContext;
     private List<Movie> mMovies;
 
-    public MovieAdapter(Context context, List<Movie> movies) {
+    public MovieAdapter(Context context) {
         this.mContext = context;
-        this.mMovies = movies;
     }
 
     @Override
@@ -57,6 +55,11 @@ public class MovieAdapter extends BaseAdapter {
                 .into(imageView);
 
         return convertView;
+    }
+
+    public void deliverResults(List<Movie> data) {
+        this.mMovies = data;
+        this.notifyDataSetChanged();
     }
 
 }
