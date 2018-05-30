@@ -43,6 +43,6 @@ public class RetrieveMoviesTask extends AsyncTask<String, Object, List<Movie>> {
     @Override
     protected void onPostExecute(List<Movie> movies) {
         mMovieAdapter.deliverResults(movies);
-        Log.v("RetrieveTASK", "Set new adapter values");
+        Log.d("RetrieveTASK", "Set new adapter values");
     }
 }

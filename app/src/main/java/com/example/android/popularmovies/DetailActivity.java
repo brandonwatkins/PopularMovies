@@ -37,7 +37,7 @@ public class DetailActivity extends AppCompatActivity {
         mOriginaltitle.setText(movie.getOriginalTitle());
         mReleaseDate.setText(movie.getReleaseDate());
         mPlotSynopsis.setText(movie.getPlotSynopsis());
-        mUserRating.setText(String.valueOf(movie.getUserRating()));
+        mUserRating.setText(String.valueOf(movie.getUserRating()) + "/10");
         mPosterURL = movie.getMoviePosterUrl();
 
         Picasso.with(DetailActivity.this)

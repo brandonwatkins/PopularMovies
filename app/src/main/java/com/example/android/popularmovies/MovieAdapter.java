@@ -68,8 +68,16 @@ public class MovieAdapter extends BaseAdapter {
     }
 
     public void deliverResults(List<Movie> data) {
-        this.mMovies = data;
-        this.notifyDataSetChanged();
+        /*MainActivity.mMovies = data;
+        this.notifyDataSetChanged();*/
+
+
+        if (data != null ) {
+            mMovies.clear();
+            mMovies.addAll(data);
+        }
+
+        notifyDataSetChanged();
     }
 
 }
