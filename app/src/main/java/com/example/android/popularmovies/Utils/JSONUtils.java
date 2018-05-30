@@ -39,7 +39,7 @@ public class JSONUtils {
                 Movie movie = new Movie();
                 movie.setMovieId(JSONMovie.optLong("id"));
                 movie.setOriginalTitle(JSONMovie.optString("original_title", FALL_BACK_STRING));
-                movie.setMoviePosterUrl("http://image.tmdb.org/t/p/w342/" + JSONMovie.optString("poster_path", FALL_BACK_STRING));
+                movie.setMoviePosterUrl("http://image.tmdb.org/t/p/w780/" + JSONMovie.optString("poster_path", FALL_BACK_STRING));
                 movie.setPlotSynopsis(JSONMovie.optString("overview", FALL_BACK_STRING));
                 movie.setUserRating(JSONMovie.optDouble("vote_average", 0));
                 movie.setReleaseDate(JSONMovie.optString("release_date", FALL_BACK_STRING));

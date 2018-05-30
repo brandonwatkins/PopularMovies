@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private GridView gridView;
     private MovieAdapter mMovieAdapter;
-    public ArrayList<Movie> movies;
+    public ArrayList<Movie> mMovies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         gridView = (GridView) findViewById(R.id.gridView);
 
-        movies = new ArrayList<>();
-        mMovieAdapter = new MovieAdapter(this, movies);
+        mMovies = new ArrayList<>();
+        mMovieAdapter = new MovieAdapter(this, mMovies);
 
         getMostPopular();
 
@@ -42,10 +42,11 @@ public class MainActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
-                Movie movie = movies.get(position);
+                Movie movie = mMovies.get(position);
 
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 intent.putExtra(MOVIE_KEY, movie);
+                startActivity(intent);
 
 
 
