@@ -5,19 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!--<GridView-->
-        <!--android:id="@+id/gridView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center"-->
-        <!--android:columnWidth="100dp"-->
-        <!--android:numColumns="auto_fit"-->
-        <!--android:verticalSpacing="1dp"-->
-        <!--android:horizontalSpacing="0dp"-->
-        <!--android:stretchMode="columnWidth"-->
-        <!--/>-->
 
-    <!-- Source: https://stackoverflow.com/questions/7705330/gridview-and-excess-space-padding -->
+    <!-- Had a lot of trouble trying to remove the extra space in the GridView. Found this XML
+         that seemed to help solve my problem.
+         Source: https://stackoverflow.com/questions/7705330/gridview-and-excess-space-padding -->
 
     <GridView
         android:id="@+id/gridView"

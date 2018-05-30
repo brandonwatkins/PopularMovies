@@ -12,8 +12,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private static final String MOVIE_KEY = "movie_key";
 
-
-    private TextView mOriginaltitle;
+    private TextView mOriginalTitle;
     private TextView mReleaseDate;
     private TextView mPlotSynopsis;
     private TextView mUserRating;
@@ -25,7 +24,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        mOriginaltitle = (TextView) findViewById(R.id.tvOriginalTitle);
+        mOriginalTitle = (TextView) findViewById(R.id.tvOriginalTitle);
         mReleaseDate = (TextView) findViewById(R.id.tvReleaseDate);
         mPlotSynopsis = (TextView) findViewById(R.id.tvPlotSynopsis);
         mUserRating = (TextView) findViewById(R.id.tvUserRating);
@@ -34,12 +33,13 @@ public class DetailActivity extends AppCompatActivity {
         Intent i = getIntent();
         Movie movie = i.getParcelableExtra(MOVIE_KEY);
 
-        mOriginaltitle.setText(movie.getOriginalTitle());
+        mOriginalTitle.setText(movie.getOriginalTitle());
         mReleaseDate.setText(movie.getReleaseDate());
         mPlotSynopsis.setText(movie.getPlotSynopsis());
         mUserRating.setText(String.valueOf(movie.getUserRating()) + "/10");
         mPosterURL = movie.getMoviePosterUrl();
 
+        //Load the movies poster again using Picasso
         Picasso.with(DetailActivity.this)
                 .load(mPosterURL)
                 .into(mPoster);

@@ -3,6 +3,9 @@ package com.example.android.popularmovies;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * Movie class
+ */
 public class Movie implements Parcelable {
 
     private Long movieId;
@@ -17,8 +20,8 @@ public class Movie implements Parcelable {
     }
 
     public Movie(String name, String imageUrl) {
-        this.originalTitle = originalTitle;
-        this.moviePosterUrl = moviePosterUrl;
+        this.originalTitle = name;
+        this.moviePosterUrl = imageUrl;
     }
 
     public Movie(String title, String posterUrl, String synopsis,

@@ -1,8 +1,6 @@
 package com.example.android.popularmovies;
 
 import android.content.Context;
-import android.nfc.Tag;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,14 +25,6 @@ public class MovieAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-
-/*        if ( mMovies.size() != 0 ) {
-            int size = this.mMovies.size();
-            Log.d(LOG_TAG, "getCount() : " + String.valueOf(size));
-            return size; // >> 20
-        } else {
-            return 0;
-        }*/
        return mMovies.size();
     }
 
@@ -45,10 +35,17 @@ public class MovieAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-       // return mMovies.get(position).getId();
         return 0;
     }
 
+    /**
+     * Help from: https://www.androidtutorialpoint.com/networking/android-picasso-tutorial-using-picasso-android-library/
+     *
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return the converted view
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater;
@@ -60,6 +57,7 @@ public class MovieAdapter extends BaseAdapter {
 
         ImageView imageView = convertView.findViewById(R.id.poster);
 
+        //Picasso is used to load the movie poster url into the image view
         Picasso.with(mContext)
                 .load(mMovies.get(position).getMoviePosterUrl())
                 .into(imageView);
@@ -68,15 +66,10 @@ public class MovieAdapter extends BaseAdapter {
     }
 
     public void deliverResults(List<Movie> data) {
-        /*MainActivity.mMovies = data;
-        this.notifyDataSetChanged();*/
-
-
-        if (data != null ) {
-            mMovies.clear();
-            mMovies.addAll(data);
-        }
-
+        //Remove existing data from the ArrayList
+        mMovies.clear();
+        //Add all the new data passed in into the ArrayList
+        mMovies.addAll(data);
         notifyDataSetChanged();
     }
 

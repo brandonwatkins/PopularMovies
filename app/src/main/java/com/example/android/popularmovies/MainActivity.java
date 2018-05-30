@@ -1,10 +1,8 @@
 package com.example.android.popularmovies;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
@@ -17,7 +15,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+
+    //Key for movie object
     private static final String MOVIE_KEY = "movie_key";
+
+    //Keys passed into the RetrieveMovies Task
     private static final String POPULAR_KEY = "popular";
     private static final String TOP_RATED_KEY = "top_rated";
 
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         mMovies = new ArrayList<>();
         mMovieAdapter = new MovieAdapter(this, mMovies);
 
+        //By default load most popular on start up
         getMostPopular();
 
         gridView.setAdapter(mMovieAdapter);
@@ -44,29 +47,19 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
                 Movie movie = mMovies.get(position);
 
+                //Create intent with movie object selected and pass it to DetailActivity
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 intent.putExtra(MOVIE_KEY, movie);
                 startActivity(intent);
-
-
-
-                // This tells the GridView to redraw itself
-                // in turn calling your MovieAdapter's getView method again for each cell
-               // movieAdapter.notifyDataSetChanged();
             }
 
         });
-
-/*        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);*/
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
         return true;
     }
 
@@ -74,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        //Load the correct list depending on the users choice
         switch (id) {
             case R.id.rating:
                 getHighestRated();
@@ -87,17 +81,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getHighestRated() {
+        //Start the AsyncTask that returns the top rated list
         RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mMovieAdapter);
-        Log.d(LOG_TAG, "Fetching Highest Rated");
         retrieveMoviesTask.execute(TOP_RATED_KEY);
-        //getSupportActionBar().setTitle(R.string.highest_rated);
     }
 
     private void getMostPopular() {
+        //Start the AsyncTask that returns the most popular list
         RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mMovieAdapter);
-        Log.d(LOG_TAG, "Fetching Popular");
         retrieveMoviesTask.execute(POPULAR_KEY);
-        //getSupportActionBar().setTitle(R.string.popular);
     }
 
 }

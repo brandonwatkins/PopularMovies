@@ -16,6 +16,15 @@ public class JSONUtils {
     private static final String LOG_TAG = JSONUtils.class.getSimpleName();
 
 
+    /**
+     * Converts the JSON string received into individual movie objects. It then add them to
+     * the arrayList. Once finished the arrayList is returned
+     *
+     * A lot of this code was recycled from the Sandwich Club app I made
+     *
+     * @param JSONString
+     * @return the movieArrayList
+     */
     public List<Movie> parseMoviesJSON (String JSONString) {
 
         try {
@@ -52,7 +61,7 @@ public class JSONUtils {
 
         } catch (JSONException j) {
             j.printStackTrace();
-            Log.d(LOG_TAG, "JSON Exception error");
+            Log.e(LOG_TAG, "JSON Exception");
         }
 
         return null;

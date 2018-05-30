@@ -17,15 +17,14 @@ public final class NetworkUtils {
 
     private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
 
-
+    //Base movie URL that I append other information onto
     private static final String MOVIE_URL = "http://api.themoviedb.org/3/movie";
-    private static final String API_KEY = "84e8c76a996104eafdee78fadd6e95db";
 
+    //API key that needs to be replaced by
+    // TODO Add API key please
+    private static final String API_KEY = "";
 
-    final static String SORT_PARAM = "";
     final static String API_PARAM = "api_key";
-
-
 
     /**
      * Method is from Sunshine's NetworkUtils class.
@@ -56,11 +55,11 @@ public final class NetworkUtils {
     }
 
     /**
-     * Builds the URL used to talk to the MovieDB server using a location. This location is based
-     * on the query capabilities of the weather provider that we are using.
+     * Builds the URL used to talk to the MovieDB server using a query string. This query string
+     * selected by the user when they decide what list of movies to display.
      *
      * @param sortQuery The way the movies will be sorted.
-     * @return The URL to use to query the weather server.
+     * @return The URL to use to query the MovieDB server.
      */
     public static URL buildUrl(String sortQuery) {
         Uri builtUri = Uri.parse(MOVIE_URL).buildUpon()
