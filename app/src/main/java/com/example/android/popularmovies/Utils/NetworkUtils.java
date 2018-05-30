@@ -21,7 +21,7 @@ public final class NetworkUtils {
     private static final String MOVIE_URL = "http://api.themoviedb.org/3/movie";
 
     //API key that needs to be replaced by
-    // TODO Add API key please
+    // TODO Reviewer please add API key below
     private static final String API_KEY = "";
 
     final static String API_PARAM = "api_key";
