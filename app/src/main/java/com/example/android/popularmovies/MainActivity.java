@@ -1,10 +1,16 @@
 package com.example.android.popularmovies;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
@@ -23,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String POPULAR_KEY = "popular";
     private static final String TOP_RATED_KEY = "top_rated";
 
-    private GridView gridView;
+    //private GridView gridView;
+    private RecyclerView mRecyclerView;
+    private  RecyclerViewAdapter mRecyclerViewAdapter;
     private MovieAdapter mMovieAdapter;
     public ArrayList<Movie> mMovies;
 
@@ -32,17 +40,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        gridView = (GridView) findViewById(R.id.gridView);
-
         mMovies = new ArrayList<>();
-        mMovieAdapter = new MovieAdapter(this, mMovies);
+
+
+
+        //gridView = findViewById(R.id.gridView);
+        mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
+
+        mRecyclerViewAdapter = new RecyclerViewAdapter(this, mMovies);
+        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+
+        //mMovieAdapter = new MovieAdapter(this, mMovies);
 
         //By default load most popular on start up
         getMostPopular();
 
-        gridView.setAdapter(mMovieAdapter);
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //gridView.setAdapter(mMovieAdapter);
+       /* gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
                 Movie movie = mMovies.get(position);
@@ -53,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
-        });
+        });*/
 
     }
 
@@ -82,13 +97,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void getHighestRated() {
         //Start the AsyncTask that returns the top rated list
-        RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mMovieAdapter);
+        RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mRecyclerViewAdapter);
         retrieveMoviesTask.execute(TOP_RATED_KEY);
     }
 
     private void getMostPopular() {
         //Start the AsyncTask that returns the most popular list
-        RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mMovieAdapter);
+        RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mRecyclerViewAdapter);
         retrieveMoviesTask.execute(POPULAR_KEY);
     }
 

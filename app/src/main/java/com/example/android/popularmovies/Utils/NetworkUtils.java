@@ -22,7 +22,7 @@ public final class NetworkUtils {
 
     //API key that needs to be replaced by
     // TODO Reviewer please add API key below
-    private static final String API_KEY = "";
+    private static final String API_KEY = "84e8c76a996104eafdee78fadd6e95db";
 
     final static String API_PARAM = "api_key";
 
