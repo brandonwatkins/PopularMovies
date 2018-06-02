@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     //private GridView gridView;
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mRecyclerViewAdapter;
-    private MovieAdapter mMovieAdapter;
     private TextView mEmptyView;
     public ArrayList<Movie> mMovies;
     private boolean isConnected;
@@ -58,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerViewAdapter = new RecyclerViewAdapter(this, mMovies);
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
-
-        //mMovieAdapter = new MovieAdapter(this, mMovies);
 
         //By default load most popular on start up
         getMostPopular();
@@ -105,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mRecyclerViewAdapter);
             retrieveMoviesTask.execute(TOP_RATED_KEY);
         } else {
-            Toast errorToast = Toast.makeText(this, "Not connected to internet", Toast.LENGTH_LONG);
+            Toast errorToast = Toast.makeText(this, getString(R.string.internet_error), Toast.LENGTH_LONG);
             errorToast.show();
         }
     }
@@ -116,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mRecyclerViewAdapter);
             retrieveMoviesTask.execute(POPULAR_KEY);
         } else {
-            Toast errorToast = Toast.makeText(this, "Not connected to internet", Toast.LENGTH_LONG);
+            Toast errorToast = Toast.makeText(this, getString(R.string.internet_error), Toast.LENGTH_LONG);
             errorToast.show();
         }
 

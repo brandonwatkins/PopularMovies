@@ -33,10 +33,12 @@ public class DetailActivity extends AppCompatActivity {
         Intent i = getIntent();
         Movie movie = i.getParcelableExtra(MOVIE_KEY);
 
+        String outOfTen = getString(R.string.out_of_ten);
+
         mOriginalTitle.setText(movie.getmOriginalTitle());
         mReleaseDate.setText(movie.getmReleaseDate());
         mPlotSynopsis.setText(movie.getmPlotSynopsis());
-        mUserRating.setText(String.valueOf(movie.getmUserRating()) + "/10");
+        mUserRating.setText(String.valueOf(movie.getmUserRating()) + outOfTen);
         mPosterURL = movie.getmMoviePosterUrl();
 
         //Load the movies poster again using Picasso

@@ -17,11 +17,12 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     private static final String LOG_TAG = RecyclerViewAdapter.class.getSimpleName();
+
+    //Key for movie object
     private static final String MOVIE_KEY = "movie_key";
 
     private Context mContext;
     private List<Movie> mMovies;
-
 
     public RecyclerViewAdapter(Context context, List<Movie> movie) {
         this.mContext = context;
@@ -34,7 +35,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
@@ -54,7 +54,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
                 mContext.startActivity(intent);
             }
         });
-
 
         //Picasso is used to load the movie poster url into the image view
         Picasso.with(mContext)

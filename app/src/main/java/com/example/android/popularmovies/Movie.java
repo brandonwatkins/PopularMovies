@@ -15,9 +15,7 @@ public class Movie implements Parcelable {
     private Double mUserRating;
     private String mReleaseDate;
 
-    public Movie() {
-
-    }
+    public Movie() {}
 
     public Movie(String name, String imageUrl) {
         this.mOriginalTitle = name;

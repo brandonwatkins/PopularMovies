@@ -1,6 +1,7 @@
 package com.example.android.popularmovies.Tasks;
 
 import android.os.AsyncTask;
+import android.view.View;
 
 import com.example.android.popularmovies.Movie;
 import com.example.android.popularmovies.RecyclerViewAdapter;
@@ -41,5 +42,6 @@ public class RetrieveMoviesTask extends AsyncTask<String, Object, List<Movie>> {
     protected void onPostExecute(List<Movie> movies) {
         //Call deliver results method return the results of the task
         mRecyclerViewAdapter.deliverResults(movies);
+
     }
 }
