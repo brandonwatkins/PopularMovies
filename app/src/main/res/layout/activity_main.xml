@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
 
@@ -10,7 +12,7 @@
          that seemed to help solve my problem.
          Source: https://stackoverflow.com/questions/7705330/gridview-and-excess-space-padding -->
 
-    <GridView
+ <!--   <GridView
         android:id="@+id/gridView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -26,7 +28,25 @@
         android:stretchMode="columnWidth"
         android:gravity="center_horizontal"
         android:background="#000000"
-        />
+        />-->
+    
+    
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</RelativeLayout>
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:text="@string/no_records_found"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        style="@android:style/TextAppearance.Large"
+        android:gravity="center"
+        android:visibility="gone">
+    </TextView>
+
+</LinearLayout>
 

@@ -8,46 +8,46 @@ import android.os.Parcelable;
  */
 public class Movie implements Parcelable {
 
-    private Long movieId;
-    private String originalTitle;
-    private String moviePosterUrl;
-    private String plotSynopsis;
-    private Double userRating;
-    private String releaseDate;
+    private Long mMovieId;
+    private String mOriginalTitle;
+    private String mMoviePosterUrl;
+    private String mPlotSynopsis;
+    private Double mUserRating;
+    private String mReleaseDate;
 
     public Movie() {
 
     }
 
     public Movie(String name, String imageUrl) {
-        this.originalTitle = name;
-        this.moviePosterUrl = imageUrl;
+        this.mOriginalTitle = name;
+        this.mMoviePosterUrl = imageUrl;
     }
 
     public Movie(String title, String posterUrl, String synopsis,
                  Double rating, String date) {
-        this.originalTitle = title;
-        this.moviePosterUrl = posterUrl;
-        this.plotSynopsis = synopsis;
-        this.userRating = rating;
-        this.releaseDate = date;
+        this.mOriginalTitle = title;
+        this.mMoviePosterUrl = posterUrl;
+        this.mPlotSynopsis = synopsis;
+        this.mUserRating = rating;
+        this.mReleaseDate = date;
     }
 
     private Movie(Parcel in){
-        originalTitle = in.readString();
-        moviePosterUrl = in.readString();
-        plotSynopsis = in.readString();
-        userRating = in.readDouble();
-        releaseDate = in.readString();
+        mOriginalTitle = in.readString();
+        mMoviePosterUrl = in.readString();
+        mPlotSynopsis = in.readString();
+        mUserRating = in.readDouble();
+        mReleaseDate = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(originalTitle);
-        parcel.writeString(moviePosterUrl);
-        parcel.writeString(plotSynopsis);
-        parcel.writeDouble(userRating);
-        parcel.writeString(releaseDate);
+        parcel.writeString(mOriginalTitle);
+        parcel.writeString(mMoviePosterUrl);
+        parcel.writeString(mPlotSynopsis);
+        parcel.writeDouble(mUserRating);
+        parcel.writeString(mReleaseDate);
     }
 
     @Override
@@ -69,51 +69,51 @@ public class Movie implements Parcelable {
     };
 
 
-    public Long getMovieId() {
-        return movieId;
+    public Long getmMovieId() {
+        return mMovieId;
     }
 
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
+    public void setmMovieId(Long mMovieId) {
+        this.mMovieId = mMovieId;
     }
 
-    public String getOriginalTitle() {
-        return originalTitle;
+    public String getmOriginalTitle() {
+        return mOriginalTitle;
     }
 
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
+    public void setmOriginalTitle(String mOriginalTitle) {
+        this.mOriginalTitle = mOriginalTitle;
     }
 
-    public String getMoviePosterUrl() {
-        return moviePosterUrl;
+    public String getmMoviePosterUrl() {
+        return mMoviePosterUrl;
     }
 
-    public void setMoviePosterUrl(String moviePosterUrl) {
-        this.moviePosterUrl = moviePosterUrl;
+    public void setmMoviePosterUrl(String mMoviePosterUrl) {
+        this.mMoviePosterUrl = mMoviePosterUrl;
     }
 
-    public String getPlotSynopsis() {
-        return plotSynopsis;
+    public String getmPlotSynopsis() {
+        return mPlotSynopsis;
     }
 
-    public void setPlotSynopsis(String plotSynopsis) {
-        this.plotSynopsis = plotSynopsis;
+    public void setmPlotSynopsis(String mPlotSynopsis) {
+        this.mPlotSynopsis = mPlotSynopsis;
     }
 
-    public Double getUserRating() {
-        return userRating;
+    public Double getmUserRating() {
+        return mUserRating;
     }
 
-    public void setUserRating(Double userRating) {
-        this.userRating = userRating;
+    public void setmUserRating(Double mUserRating) {
+        this.mUserRating = mUserRating;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getmReleaseDate() {
+        return mReleaseDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setmReleaseDate(String mReleaseDate) {
+        this.mReleaseDate = mReleaseDate;
     }
 }
