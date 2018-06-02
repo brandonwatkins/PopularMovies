@@ -2,5 +2,7 @@
     <string name="app_name">PopularMovies</string>
     <string name="top_rated">Top Rated</string>
     <string name="most_popular">Most Popular</string>
+    <string name="no_records_found">Error finding movies...</string>
+
 
 </resources>

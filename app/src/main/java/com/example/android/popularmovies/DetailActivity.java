@@ -24,20 +24,20 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        mOriginalTitle = (TextView) findViewById(R.id.tvOriginalTitle);
-        mReleaseDate = (TextView) findViewById(R.id.tvReleaseDate);
-        mPlotSynopsis = (TextView) findViewById(R.id.tvPlotSynopsis);
-        mUserRating = (TextView) findViewById(R.id.tvUserRating);
-        mPoster = (ImageView) findViewById(R.id.ivPoster);
+        mOriginalTitle = findViewById(R.id.tvOriginalTitle);
+        mReleaseDate = findViewById(R.id.tvReleaseDate);
+        mPlotSynopsis = findViewById(R.id.tvPlotSynopsis);
+        mUserRating = findViewById(R.id.tvUserRating);
+        mPoster = findViewById(R.id.ivPoster);
 
         Intent i = getIntent();
         Movie movie = i.getParcelableExtra(MOVIE_KEY);
 
-        mOriginalTitle.setText(movie.getOriginalTitle());
-        mReleaseDate.setText(movie.getReleaseDate());
-        mPlotSynopsis.setText(movie.getPlotSynopsis());
-        mUserRating.setText(String.valueOf(movie.getUserRating()) + "/10");
-        mPosterURL = movie.getMoviePosterUrl();
+        mOriginalTitle.setText(movie.getmOriginalTitle());
+        mReleaseDate.setText(movie.getmReleaseDate());
+        mPlotSynopsis.setText(movie.getmPlotSynopsis());
+        mUserRating.setText(String.valueOf(movie.getmUserRating()) + "/10");
+        mPosterURL = movie.getmMoviePosterUrl();
 
         //Load the movies poster again using Picasso
         Picasso.with(DetailActivity.this)

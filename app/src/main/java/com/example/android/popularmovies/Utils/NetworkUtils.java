@@ -3,6 +3,8 @@ package com.example.android.popularmovies.Utils;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.android.popularmovies.BuildConfig;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -20,9 +22,8 @@ public final class NetworkUtils {
     //Base movie URL that I append other information onto
     private static final String MOVIE_URL = "http://api.themoviedb.org/3/movie";
 
-    //API key that needs to be replaced by
-    // TODO Reviewer please add API key below
-    private static final String API_KEY = "84e8c76a996104eafdee78fadd6e95db";
+    //API Key
+    private static String API_KEY = BuildConfig.THE_GUARDIAN_API_KEY;
 
     final static String API_PARAM = "api_key";
 

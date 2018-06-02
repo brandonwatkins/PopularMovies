@@ -46,12 +46,12 @@ public class JSONUtils {
 
                 //Create movie object from JSON
                 Movie movie = new Movie();
-                movie.setMovieId(JSONMovie.optLong("id"));
-                movie.setOriginalTitle(JSONMovie.optString("original_title", FALL_BACK_STRING));
-                movie.setMoviePosterUrl("http://image.tmdb.org/t/p/w185/" + JSONMovie.optString("poster_path", FALL_BACK_STRING));
-                movie.setPlotSynopsis(JSONMovie.optString("overview", FALL_BACK_STRING));
-                movie.setUserRating(JSONMovie.optDouble("vote_average", 0));
-                movie.setReleaseDate(JSONMovie.optString("release_date", FALL_BACK_STRING));
+                movie.setmMovieId(JSONMovie.optLong("id"));
+                movie.setmOriginalTitle(JSONMovie.optString("original_title", FALL_BACK_STRING));
+                movie.setmMoviePosterUrl("http://image.tmdb.org/t/p/w185/" + JSONMovie.optString("poster_path", FALL_BACK_STRING));
+                movie.setmPlotSynopsis(JSONMovie.optString("overview", FALL_BACK_STRING));
+                movie.setmUserRating(JSONMovie.optDouble("vote_average", 0));
+                movie.setmReleaseDate(JSONMovie.optString("release_date", FALL_BACK_STRING));
 
                 //Add the movie object to my List
                 movieArrayList.add(movie);

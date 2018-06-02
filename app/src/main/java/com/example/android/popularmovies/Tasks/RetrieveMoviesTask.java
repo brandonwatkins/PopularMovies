@@ -1,10 +1,8 @@
 package com.example.android.popularmovies.Tasks;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.example.android.popularmovies.Movie;
-import com.example.android.popularmovies.MovieAdapter;
 import com.example.android.popularmovies.RecyclerViewAdapter;
 import com.example.android.popularmovies.Utils.JSONUtils;
 import com.example.android.popularmovies.Utils.NetworkUtils;

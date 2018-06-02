@@ -59,7 +59,7 @@ public class MovieAdapter extends BaseAdapter {
 
         //Picasso is used to load the movie poster url into the image view
         Picasso.with(mContext)
-                .load(mMovies.get(position).getMoviePosterUrl())
+                .load(mMovies.get(position).getmMoviePosterUrl())
                 .into(imageView);
 
         return convertView;

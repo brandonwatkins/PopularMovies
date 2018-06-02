@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -59,7 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         //Picasso is used to load the movie poster url into the image view
         Picasso.with(mContext)
-                .load(mMovies.get(position).getMoviePosterUrl())
+                .load(mMovies.get(position).getmMoviePosterUrl())
                 .into(imageView);
 
     }
