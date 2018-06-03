@@ -61,15 +61,6 @@ public class MainActivity extends AppCompatActivity {
         //By default load most popular on start up
         getMostPopular();
 
-        //Show "empty" TextView if mMovies didn't get filled
-        if (mMovies.isEmpty()) {
-            mRecyclerView.setVisibility(View.GONE);
-            mEmptyView.setVisibility(View.VISIBLE);
-        }
-        else {
-            mRecyclerView.setVisibility(View.VISIBLE);
-            mEmptyView.setVisibility(View.GONE);
-        }
 
     }
 
@@ -101,9 +92,17 @@ public class MainActivity extends AppCompatActivity {
         if (isConnected) {
             RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mRecyclerViewAdapter);
             retrieveMoviesTask.execute(TOP_RATED_KEY);
+
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mEmptyView.setVisibility(View.GONE);
         } else {
             Toast errorToast = Toast.makeText(this, getString(R.string.internet_error), Toast.LENGTH_LONG);
             errorToast.show();
+
+            //Show "empty" TextView if no internet connection
+            mRecyclerView.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
+
         }
     }
 
@@ -112,9 +111,16 @@ public class MainActivity extends AppCompatActivity {
         if (isConnected) {
             RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mRecyclerViewAdapter);
             retrieveMoviesTask.execute(POPULAR_KEY);
+
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mEmptyView.setVisibility(View.GONE);
         } else {
             Toast errorToast = Toast.makeText(this, getString(R.string.internet_error), Toast.LENGTH_LONG);
             errorToast.show();
+
+            //Show "empty" TextView if no internet connection
+            mRecyclerView.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
         }
 
     }

@@ -1,9 +1,12 @@
 package com.example.android.popularmovies.Tasks;
 
 import android.os.AsyncTask;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.android.popularmovies.Movie;
+import com.example.android.popularmovies.R;
 import com.example.android.popularmovies.RecyclerViewAdapter;
 import com.example.android.popularmovies.Utils.JSONUtils;
 import com.example.android.popularmovies.Utils.NetworkUtils;
