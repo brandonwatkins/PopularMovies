@@ -3,6 +3,7 @@ package com.example.android.popularmovies;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,6 +41,10 @@ public class DetailActivity extends AppCompatActivity {
         mPlotSynopsis.setText(movie.getmPlotSynopsis());
         mUserRating.setText(String.valueOf(movie.getmUserRating()) + outOfTen);
         mPosterURL = movie.getmMoviePosterUrl();
+
+        String id = movie.getmMovieId();
+
+        Log.d("DETAILS_ACTIVITY", "ID num:" + id);
 
         //Load the movies poster again using Picasso
         Picasso.with(DetailActivity.this)

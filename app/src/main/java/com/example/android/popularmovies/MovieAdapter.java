@@ -14,9 +14,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class MovieAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-    private static final String LOG_TAG = RecyclerViewAdapter.class.getSimpleName();
+    private static final String LOG_TAG = MovieAdapter.class.getSimpleName();
 
     //Key for movie object
     private static final String MOVIE_KEY = "movie_key";
@@ -24,7 +24,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
     private Context mContext;
     private List<Movie> mMovies;
 
-    public RecyclerViewAdapter(Context context, List<Movie> movie) {
+    public MovieAdapter(Context context, List<Movie> movie) {
         this.mContext = context;
         this.mMovies = movie;
     }

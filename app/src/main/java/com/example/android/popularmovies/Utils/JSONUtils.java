@@ -46,7 +46,7 @@ public class JSONUtils {
 
                 //Create movie object from JSON
                 Movie movie = new Movie();
-                movie.setmMovieId(JSONMovie.optLong("id"));
+                movie.setmMovieId(JSONMovie.optString("id", FALL_BACK_STRING));
                 movie.setmOriginalTitle(JSONMovie.optString("original_title", FALL_BACK_STRING));
                 movie.setmMoviePosterUrl("http://image.tmdb.org/t/p/w185/" + JSONMovie.optString("poster_path", FALL_BACK_STRING));
                 movie.setmPlotSynopsis(JSONMovie.optString("overview", FALL_BACK_STRING));
