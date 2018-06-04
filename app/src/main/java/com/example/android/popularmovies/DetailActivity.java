@@ -36,7 +36,7 @@ public class DetailActivity extends AppCompatActivity {
         String outOfTen = getString(R.string.out_of_ten);
 
         mOriginalTitle.setText(movie.getmOriginalTitle());
-        mReleaseDate.setText(movie.getmReleaseDate());
+        mReleaseDate.setText(movie.getReleaseYear(movie.getmReleaseDate()));
         mPlotSynopsis.setText(movie.getmPlotSynopsis());
         mUserRating.setText(String.valueOf(movie.getmUserRating()) + outOfTen);
         mPosterURL = movie.getmMoviePosterUrl();

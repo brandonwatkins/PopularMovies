@@ -66,6 +66,11 @@ public class Movie implements Parcelable {
 
     };
 
+    public String getReleaseYear(String releaseString) {
+        String[] dateArray = releaseString.split("-");
+        String releaseYear = dateArray[0];
+        return releaseYear;
+    }
 
     public Long getmMovieId() {
         return mMovieId;
