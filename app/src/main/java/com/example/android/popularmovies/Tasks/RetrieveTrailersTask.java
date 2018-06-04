@@ -2,6 +2,7 @@ package com.example.android.popularmovies.Tasks;
 
 import android.os.AsyncTask;
 
+import com.example.android.popularmovies.Adapters.TrailerAdapter;
 import com.example.android.popularmovies.Movie;
 import com.example.android.popularmovies.Adapters.MovieAdapter;
 import com.example.android.popularmovies.Utils.JSONUtils;
@@ -11,12 +12,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RetrieveMoviesTask extends AsyncTask<String, Object, List<Movie>> {
+public class RetrieveTrailersTask extends AsyncTask<String, Void, ArrayList> {
 
-    MovieAdapter mMovieAdapter;
+    MovieAdapter mTrailerAdapter;
 
-    public RetrieveMoviesTask(MovieAdapter movieAdapter) {
-        this.mMovieAdapter = movieAdapter;
+    public RetrieveTrailersTask(TrailerAdapter trailerAdapter) {
+        this.mTrailerAdapter = trailerAdapter;
     }
 
     @Override
@@ -38,9 +39,9 @@ public class RetrieveMoviesTask extends AsyncTask<String, Object, List<Movie>> {
     }
 
     @Override
-    protected void onPostExecute(List<Movie> movies) {
+    protected void onPostExecute(ArrayList trailers) {
         //Call deliver results method return the results of the task
-        mMovieAdapter.deliverResults(movies);
+        mTrailerAdapter.deliverResults(trailers);
 
     }
 }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.popularmovies.Adapters.MovieAdapter;
 import com.example.android.popularmovies.Tasks.RetrieveMoviesTask;
 
 import java.util.ArrayList;
