@@ -80,13 +80,13 @@ public class JSONUtils {
             JSONObject mainJSONObject = new JSONObject(JSONString);
 
             //Create the results array
-            JSONArray resultsArray = mainJSONObject.getJSONArray("results");
+            JSONArray resultsArray = mainJSONObject.getJSONArray("youtube");
 
 
             for (int i = 0; i < resultsArray.length(); i++) {
 
                 JSONObject JSONTrailer = resultsArray.getJSONObject(i);
-                String JSONKey = JSONTrailer.optString("key", FALL_BACK_STRING);
+                String JSONKey = JSONTrailer.optString("source", FALL_BACK_STRING);
                 trailerList.add(JSONKey);
             }
 

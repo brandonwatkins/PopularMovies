@@ -14,28 +14,27 @@ import java.util.List;
 
 public class RetrieveTrailersTask extends AsyncTask<String, Void, ArrayList> {
 
-    MovieAdapter mTrailerAdapter;
+    TrailerAdapter mTrailerAdapter;
 
     public RetrieveTrailersTask(TrailerAdapter trailerAdapter) {
         this.mTrailerAdapter = trailerAdapter;
     }
 
     @Override
-    protected List<Movie> doInBackground(String... params) {
+    protected ArrayList doInBackground(String... params) {
 
-        List<Movie> movieArray = new ArrayList<>();
+        ArrayList trailerArray = new ArrayList<>();
         JSONUtils jsonUtils = new JSONUtils();
 
         try {
-            //Use the parameter passed in (either top_rated or popular) to retrieve the correct
-            //list of movies
-            String responseFromHttpUrl = NetworkUtils.getResponseFromHttpUrl(NetworkUtils.buildUrl(params[0]));
-            movieArray = jsonUtils.parseMoviesJSON(responseFromHttpUrl);
+            //Use the id passed in to retrieve the correct movie trailers
+            String responseFromHttpUrl = NetworkUtils.getResponseFromHttpUrl(NetworkUtils.buildTrailerlUrl(params[0]));
+            trailerArray = jsonUtils.parseTrailersJSON(responseFromHttpUrl);
         } catch (IOException o) {
             o.printStackTrace();
         }
 
-        return movieArray;
+        return trailerArray;
     }
 
     @Override

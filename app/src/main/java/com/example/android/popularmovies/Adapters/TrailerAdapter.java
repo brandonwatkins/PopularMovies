@@ -1,7 +1,9 @@
 package com.example.android.popularmovies.Adapters;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,16 +11,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.android.popularmovies.DetailActivity;
 import com.example.android.popularmovies.Movie;
 import com.example.android.popularmovies.R;
-import com.example.android.popularmovies.ViewHolder;
+import com.example.android.popularmovies.ViewHolders.TrailerViewHolder;
+import com.example.android.popularmovies.ViewHolders.ViewHolder;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TrailerAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class TrailerAdapter extends RecyclerView.Adapter<TrailerViewHolder> {
 
     private static final String LOG_TAG = TrailerAdapter.class.getSimpleName();
 
@@ -26,56 +31,61 @@ public class TrailerAdapter extends RecyclerView.Adapter<ViewHolder> {
     private static final String MOVIE_KEY = "movie_key";
 
     private Context mContext;
-    private List<Movie> mMovies;
+    private ArrayList<String> mTrailers;
 
-    public TrailerAdapter(Context context, List<Movie> movie) {
+    public TrailerAdapter(Context context, ArrayList<String> trailers) {
         this.mContext = context;
-        this.mMovies = movie;
+        this.mTrailers = trailers;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_poster, parent, false);
-        ViewHolder viewHolder = new ViewHolder(v);
+    public TrailerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_reviews, parent, false);
+        TrailerViewHolder viewHolder = new TrailerViewHolder(v);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull TrailerViewHolder holder, final int position) {
 
-        ImageView imageView = holder.mPoster;
+        holder.trailerName.setText("Trailer " + position);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
+        holder.trailerName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(LOG_TAG, "Clicked item: " + position);
 
-                Movie movie = mMovies.get(position);
+                String trailerURL = mTrailers.get(position);
 
-                //Create intent with movie object selected and pass it to DetailActivity
-                Intent intent = new Intent(mContext, DetailActivity.class);
-                intent.putExtra(MOVIE_KEY, movie);
-                mContext.startActivity(intent);
+                // Create intent with trailers URL. Found help with the link below.
+                // Source: https://stackoverflow.com/questions/574195/android-youtube-app-play-video-intent
+
+                Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + trailerURL));
+                Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://www.youtube.com/watch?v=" + trailerURL));
+                try {
+                    mContext.startActivity(appIntent);
+                } catch (ActivityNotFoundException ex) {
+                    mContext.startActivity(webIntent);
+                }
             }
         });
-
-        //Picasso is used to load the movie poster url into the image view
-        Picasso.with(mContext)
-                .load(mMovies.get(position).getmMoviePosterUrl())
-                .into(imageView);
 
     }
 
     @Override
     public int getItemCount() {
-        return mMovies.size();
+        if (mTrailers == null)
+            return 0;
+        else
+            return  mTrailers.size();
     }
 
-    public void deliverResults(List<Movie> data) {
+    public void deliverResults(ArrayList<String> data) {
         //Remove existing data from the ArrayList
-        mMovies.clear();
+        mTrailers.clear();
         //Add all the new data passed in into the ArrayList
-        mMovies.addAll(data);
+        mTrailers.addAll(data);
         notifyDataSetChanged();
     }
 

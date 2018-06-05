@@ -3,11 +3,20 @@ package com.example.android.popularmovies;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.popularmovies.Adapters.MovieAdapter;
+import com.example.android.popularmovies.Adapters.TrailerAdapter;
+import com.example.android.popularmovies.Tasks.RetrieveMoviesTask;
+import com.example.android.popularmovies.Tasks.RetrieveTrailersTask;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -20,6 +29,9 @@ public class DetailActivity extends AppCompatActivity {
     private ImageView mPoster;
     private String mPosterURL;
 
+    private TrailerAdapter mTrailerAdapter;
+    private RecyclerView mTrailersRecyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +42,9 @@ public class DetailActivity extends AppCompatActivity {
         mPlotSynopsis = findViewById(R.id.tvPlotSynopsis);
         mUserRating = findViewById(R.id.tvUserRating);
         mPoster = findViewById(R.id.ivPoster);
+        mTrailersRecyclerView = findViewById(R.id.rvTrailers);
+
+        ArrayList<String> mTrailers = new ArrayList<>();
 
         Intent i = getIntent();
         Movie movie = i.getParcelableExtra(MOVIE_KEY);
@@ -50,6 +65,16 @@ public class DetailActivity extends AppCompatActivity {
         Picasso.with(DetailActivity.this)
                 .load(mPosterURL)
                 .into(mPoster);
+
+
+
+        mTrailersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mTrailerAdapter = new TrailerAdapter(this, mTrailers);
+        mTrailersRecyclerView.setAdapter(mTrailerAdapter);
+
+        RetrieveTrailersTask retrieveTrailersTask = new RetrieveTrailersTask(mTrailerAdapter);
+        retrieveTrailersTask.execute(id);
 
     }
 }
