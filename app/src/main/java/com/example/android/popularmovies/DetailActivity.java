@@ -11,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.popularmovies.Adapters.MovieAdapter;
+import com.example.android.popularmovies.Adapters.ReviewsAdapter;
 import com.example.android.popularmovies.Adapters.TrailerAdapter;
 import com.example.android.popularmovies.Tasks.RetrieveMoviesTask;
+import com.example.android.popularmovies.Tasks.RetrieveReviewsTask;
 import com.example.android.popularmovies.Tasks.RetrieveTrailersTask;
 import com.squareup.picasso.Picasso;
 
@@ -32,6 +34,9 @@ public class DetailActivity extends AppCompatActivity {
     private TrailerAdapter mTrailerAdapter;
     private RecyclerView mTrailersRecyclerView;
 
+    private ReviewsAdapter mReviewsAdapter;
+    private RecyclerView mReviewsRecyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +48,11 @@ public class DetailActivity extends AppCompatActivity {
         mUserRating = findViewById(R.id.tvUserRating);
         mPoster = findViewById(R.id.ivPoster);
         mTrailersRecyclerView = findViewById(R.id.rvTrailers);
+        mReviewsRecyclerView = findViewById(R.id.rvReviews);
+
 
         ArrayList<String> mTrailers = new ArrayList<>();
+        ArrayList<String> mReviews = new ArrayList<>();
 
         Intent i = getIntent();
         Movie movie = i.getParcelableExtra(MOVIE_KEY);
@@ -75,6 +83,14 @@ public class DetailActivity extends AppCompatActivity {
 
         RetrieveTrailersTask retrieveTrailersTask = new RetrieveTrailersTask(mTrailerAdapter);
         retrieveTrailersTask.execute(id);
+
+        mReviewsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mReviewsAdapter = new ReviewsAdapter(this, mReviews);
+        mReviewsRecyclerView.setAdapter(mReviewsAdapter);
+
+        RetrieveReviewsTask retrieveReviewsTask = new RetrieveReviewsTask(mReviewsAdapter);
+        retrieveReviewsTask.execute(id);
 
     }
 }

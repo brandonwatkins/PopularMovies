@@ -28,6 +28,8 @@ public final class NetworkUtils {
     //API Key
     private static String API_KEY = BuildConfig.THE_GUARDIAN_API_KEY;
     private static String TRAILER_KEY = "trailers";
+    private static String REVIEWS_KEY = "reviews";
+
 
 
     final static String API_PARAM = "api_key";
@@ -94,10 +96,36 @@ public final class NetworkUtils {
      * @param id movies id
      * @return The URL to use to query the MovieDB server.
      */
-    public static URL buildTrailerlUrl(String id) {
+    public static URL buildTrailerUrl(String id) {
         Uri builtUri = Uri.parse(MOVIE_URL).buildUpon()
                 .appendPath(id)
                 .appendPath(TRAILER_KEY)
+                .appendQueryParameter(API_PARAM, API_KEY)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        Log.v(LOG_TAG, "Built URI " + url);
+
+        return url;
+    }
+
+    /**
+     * Builds the URL used to talk to the MovieDB server using a query string. This query string
+     * can be reviews or trailers.
+     *
+     * @param id movies id
+     * @return The URL to use to query the MovieDB server.
+     */
+    public static URL buildReviewsUrl(String id) {
+        Uri builtUri = Uri.parse(MOVIE_URL).buildUpon()
+                .appendPath(id)
+                .appendPath(REVIEWS_KEY)
                 .appendQueryParameter(API_PARAM, API_KEY)
                 .build();
 

@@ -12,43 +12,44 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android.popularmovies.R;
+import com.example.android.popularmovies.ViewHolders.ReviewsViewHolder;
 import com.example.android.popularmovies.ViewHolders.TrailerViewHolder;
 
 import java.util.ArrayList;
 
-public class TrailerAdapter extends RecyclerView.Adapter<TrailerViewHolder> {
+public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsViewHolder> {
 
-    private static final String LOG_TAG = TrailerAdapter.class.getSimpleName();
+    private static final String LOG_TAG = ReviewsAdapter.class.getSimpleName();
 
     //Key for movie object
     private static final String MOVIE_KEY = "movie_key";
 
     private Context mContext;
-    private ArrayList<String> mTrailers;
+    private ArrayList<String> mReviews;
 
-    public TrailerAdapter(Context context, ArrayList<String> trailers) {
+    public ReviewsAdapter(Context context, ArrayList<String> reviews) {
         this.mContext = context;
-        this.mTrailers = trailers;
+        this.mReviews = reviews;
     }
 
     @Override
-    public TrailerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_trailers, parent, false);
-        TrailerViewHolder viewHolder = new TrailerViewHolder(v);
+    public ReviewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_reviews, parent, false);
+        ReviewsViewHolder viewHolder = new ReviewsViewHolder(v);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TrailerViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ReviewsViewHolder holder, final int position) {
 
-        holder.trailerName.setText("Trailer " + position);
+        holder.tvReview.setText(mReviews.get(position));
 
-        holder.trailerName.setOnClickListener(new View.OnClickListener() {
+        /*holder.trailerName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(LOG_TAG, "Clicked item: " + position);
 
-                String trailerURL = mTrailers.get(position);
+                String trailerURL = mReviews.get(position);
 
                 // Create intent with trailers URL. Found help with the link below.
                 // Source: https://stackoverflow.com/questions/574195/android-youtube-app-play-video-intent
@@ -62,23 +63,23 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerViewHolder> {
                     mContext.startActivity(webIntent);
                 }
             }
-        });
+        });*/
 
     }
 
     @Override
     public int getItemCount() {
-        if (mTrailers == null)
+        if (mReviews == null)
             return 0;
         else
-            return  mTrailers.size();
+            return  mReviews.size();
     }
 
     public void deliverResults(ArrayList<String> data) {
         //Remove existing data from the ArrayList
-        mTrailers.clear();
+        mReviews.clear();
         //Add all the new data passed in into the ArrayList
-        mTrailers.addAll(data);
+        mReviews.addAll(data);
         notifyDataSetChanged();
     }
 
