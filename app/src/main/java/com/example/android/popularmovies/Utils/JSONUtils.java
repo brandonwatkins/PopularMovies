@@ -46,7 +46,7 @@ public class JSONUtils {
 
                 //Create movie object from JSON
                 Movie movie = new Movie();
-                movie.setmMovieId(JSONMovie.optLong("id"));
+                movie.setmMovieId(JSONMovie.optString("id", FALL_BACK_STRING));
                 movie.setmOriginalTitle(JSONMovie.optString("original_title", FALL_BACK_STRING));
                 movie.setmMoviePosterUrl("http://image.tmdb.org/t/p/w185/" + JSONMovie.optString("poster_path", FALL_BACK_STRING));
                 movie.setmPlotSynopsis(JSONMovie.optString("overview", FALL_BACK_STRING));
@@ -66,6 +66,73 @@ public class JSONUtils {
 
         return null;
     }
+
+    public ArrayList<String> parseTrailersJSON (String JSONString) {
+
+        try {
+
+            //Fall back string will produce a funny video
+            String FALL_BACK_STRING = "bXZEP6OwKBQ";
+
+            ArrayList<String> trailerList = new ArrayList<>();
+
+            //Create the main JSON object from the JSON passed in
+            JSONObject mainJSONObject = new JSONObject(JSONString);
+
+            //Create the results array
+            JSONArray resultsArray = mainJSONObject.getJSONArray("youtube");
+
+
+            for (int i = 0; i < resultsArray.length(); i++) {
+
+                JSONObject JSONTrailer = resultsArray.getJSONObject(i);
+                String JSONKey = JSONTrailer.optString("source", FALL_BACK_STRING);
+                trailerList.add(JSONKey);
+            }
+
+            return trailerList;
+
+        } catch (JSONException j) {
+            j.printStackTrace();
+            Log.e(LOG_TAG, "JSON Exception");
+        }
+
+        return null;
+    }
+
+    public ArrayList<String> parseReviewsJSON (String JSONString) {
+
+        try {
+
+            //Fall back string will produce a funny video
+            String FALL_BACK_STRING = "N/A";
+
+            ArrayList<String> reviewList = new ArrayList<>();
+
+            //Create the main JSON object from the JSON passed in
+            JSONObject mainJSONObject = new JSONObject(JSONString);
+
+            //Create the results array
+            JSONArray resultsArray = mainJSONObject.getJSONArray("results");
+
+
+            for (int i = 0; i < resultsArray.length(); i++) {
+
+                JSONObject JSONReview = resultsArray.getJSONObject(i);
+                String JSONcontent = JSONReview.optString("content", FALL_BACK_STRING);
+                reviewList.add(JSONcontent);
+            }
+
+            return reviewList;
+
+        } catch (JSONException j) {
+            j.printStackTrace();
+            Log.e(LOG_TAG, "JSON Exception");
+        }
+
+        return null;
+    }
+
 }
 
 

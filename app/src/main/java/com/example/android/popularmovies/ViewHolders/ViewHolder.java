@@ -1,8 +1,10 @@
-package com.example.android.popularmovies;
+package com.example.android.popularmovies.ViewHolders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.android.popularmovies.R;
 
 /**
  * ViewHolder Class

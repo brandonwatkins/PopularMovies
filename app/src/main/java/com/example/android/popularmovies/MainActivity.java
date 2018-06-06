@@ -12,8 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
+import com.example.android.popularmovies.Adapters.MovieAdapter;
 import com.example.android.popularmovies.Tasks.RetrieveMoviesTask;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     //private GridView gridView;
     private RecyclerView mRecyclerView;
-    private RecyclerViewAdapter mRecyclerViewAdapter;
+    private MovieAdapter mMovieAdapter;
     private TextView mEmptyView;
     public ArrayList<Movie> mMovies;
     private boolean isConnected;
@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
 
-        mRecyclerViewAdapter = new RecyclerViewAdapter(this, mMovies);
-        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+        mMovieAdapter = new MovieAdapter(this, mMovies);
+        mRecyclerView.setAdapter(mMovieAdapter);
 
         //By default load most popular on start up
         getMostPopular();
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     private void getHighestRated() {
         //Start the AsyncTask that returns the top rated list
         if (isConnected) {
-            RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mRecyclerViewAdapter);
+            RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mMovieAdapter);
             retrieveMoviesTask.execute(TOP_RATED_KEY);
 
             mRecyclerView.setVisibility(View.VISIBLE);
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     private void getMostPopular() {
         //Start the AsyncTask that returns the most popular list
         if (isConnected) {
-            RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mRecyclerViewAdapter);
+            RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mMovieAdapter);
             retrieveMoviesTask.execute(POPULAR_KEY);
 
             mRecyclerView.setVisibility(View.VISIBLE);

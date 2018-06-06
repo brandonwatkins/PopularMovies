@@ -1,13 +1,9 @@
 package com.example.android.popularmovies.Tasks;
 
 import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.TextView;
 
 import com.example.android.popularmovies.Movie;
-import com.example.android.popularmovies.R;
-import com.example.android.popularmovies.RecyclerViewAdapter;
+import com.example.android.popularmovies.Adapters.MovieAdapter;
 import com.example.android.popularmovies.Utils.JSONUtils;
 import com.example.android.popularmovies.Utils.NetworkUtils;
 
@@ -17,10 +13,10 @@ import java.util.List;
 
 public class RetrieveMoviesTask extends AsyncTask<String, Object, List<Movie>> {
 
-    RecyclerViewAdapter mRecyclerViewAdapter;
+    MovieAdapter mMovieAdapter;
 
-    public RetrieveMoviesTask(RecyclerViewAdapter recyclerViewAdapter) {
-        this.mRecyclerViewAdapter = recyclerViewAdapter;
+    public RetrieveMoviesTask(MovieAdapter movieAdapter) {
+        this.mMovieAdapter = movieAdapter;
     }
 
     @Override
@@ -44,7 +40,7 @@ public class RetrieveMoviesTask extends AsyncTask<String, Object, List<Movie>> {
     @Override
     protected void onPostExecute(List<Movie> movies) {
         //Call deliver results method return the results of the task
-        mRecyclerViewAdapter.deliverResults(movies);
+        mMovieAdapter.deliverResults(movies);
 
     }
 }

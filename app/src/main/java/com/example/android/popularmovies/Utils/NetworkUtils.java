@@ -22,10 +22,17 @@ public final class NetworkUtils {
     //Base movie URL that I append other information onto
     private static final String MOVIE_URL = "http://api.themoviedb.org/3/movie";
 
+    // http://api.themoviedb.org/3/movie/383498/reviews?api_key=84e8c76a996104eafdee78fadd6e95db
+    // http://api.themoviedb.org/3/movie/popular?api_key=84e8c76a996104eafdee78fadd6e95db
+
     //API Key
     private static String API_KEY = BuildConfig.THE_GUARDIAN_API_KEY;
+    private static String TRAILER_KEY = "trailers";
+
 
     final static String API_PARAM = "api_key";
+   // final static String TRAILER_PARAM = "api_key";
+
 
     /**
      * Method is from Sunshine's NetworkUtils class.
@@ -65,6 +72,32 @@ public final class NetworkUtils {
     public static URL buildUrl(String sortQuery) {
         Uri builtUri = Uri.parse(MOVIE_URL).buildUpon()
                 .appendPath(sortQuery)
+                .appendQueryParameter(API_PARAM, API_KEY)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        Log.v(LOG_TAG, "Built URI " + url);
+
+        return url;
+    }
+
+    /**
+     * Builds the URL used to talk to the MovieDB server using a query string. This query string
+     * can be reviews or trailers.
+     *
+     * @param id movies id
+     * @return The URL to use to query the MovieDB server.
+     */
+    public static URL buildTrailerlUrl(String id) {
+        Uri builtUri = Uri.parse(MOVIE_URL).buildUpon()
+                .appendPath(id)
+                .appendPath(TRAILER_KEY)
                 .appendQueryParameter(API_PARAM, API_KEY)
                 .build();
 
