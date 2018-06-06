@@ -9,6 +9,10 @@
     <TextView
         android:id="@+id/tvTrailer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"/>
 
 </LinearLayout>

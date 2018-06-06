@@ -5,6 +5,10 @@
     <string name="no_records_found">Error finding movies...</string>
     <string name="out_of_ten">/10</string>
     <string name="internet_error">Not connected to internet</string>
+    <string name="trailers_title">Trailers:</string>
+    <string name="reviews_title">Reviews:</string>
+
+
 
 
 </resources>
