@@ -6,14 +6,19 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.popularmovies.Adapters.ReviewsAdapter;
 import com.example.android.popularmovies.Adapters.TrailerAdapter;
 import com.example.android.popularmovies.Database.Movie;
+import com.example.android.popularmovies.Database.PopularMoviesDb;
+import com.example.android.popularmovies.Tasks.AddToFavouritesTask;
 import com.example.android.popularmovies.Tasks.RetrieveReviewsTask;
 import com.example.android.popularmovies.Tasks.RetrieveTrailersTask;
+import com.example.android.popularmovies.Tasks.UpdateIsFavouriteTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -28,12 +33,16 @@ public class DetailActivity extends AppCompatActivity {
     private TextView mUserRating;
     private ImageView mPoster;
     private String mPosterURL;
+    private ImageButton mFavBtn;
 
     private TrailerAdapter mTrailerAdapter;
     private RecyclerView mTrailersRecyclerView;
 
     private ReviewsAdapter mReviewsAdapter;
     private RecyclerView mReviewsRecyclerView;
+
+    PopularMoviesDb database;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,7 @@ public class DetailActivity extends AppCompatActivity {
         mPoster = findViewById(R.id.ivPoster);
         mTrailersRecyclerView = findViewById(R.id.rvTrailers);
         mReviewsRecyclerView = findViewById(R.id.rvReviews);
+        mFavBtn = findViewById(R.id.ibFavButton);
 
 
         ArrayList<String> mTrailers = new ArrayList<>();
@@ -89,6 +99,28 @@ public class DetailActivity extends AppCompatActivity {
 
         RetrieveReviewsTask retrieveReviewsTask = new RetrieveReviewsTask(mReviewsAdapter);
         retrieveReviewsTask.execute(id);
+
+        mFavBtn.setOnClickListener(new FavouritesOnClickListener(movie));
+
+        // Get reference to the apps database
+        database = PopularMoviesDb.getDatabase(this);
+
+    }
+
+
+    public class FavouritesOnClickListener implements View.OnClickListener {
+
+        Movie movie;
+        public FavouritesOnClickListener(Movie movie) {
+            this.movie = movie;
+        }
+
+        @Override
+        public void onClick(View v) {
+            new UpdateIsFavouriteTask(PopularMoviesDb.getDatabase(v.getContext())).execute();
+            new AddToFavouritesTask(database).execute(movie);
+
+        }
 
     }
 }

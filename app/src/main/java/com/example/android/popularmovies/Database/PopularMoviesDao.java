@@ -21,16 +21,16 @@ public interface PopularMoviesDao {
     //@Query("SELECT * FROM StudySession ORDER BY time")
     //LiveData<List<StudySession>> getAllStudySessions();
 
-    @Query("SELECT * FROM PopularMovies WHERE mIsFav!=0 ORDER BY mMovieId")
+    @Query("SELECT * FROM PopularMovies WHERE mIsFav!=1 ORDER BY mMovieId")
     LiveData<List<Movie>> getFavourites();
 
     @Insert(onConflict = REPLACE)
     void addFavourite(Movie movie);
 
-    @Update
-    void updateFavourite(Movie movie);
+   /* @Update
+    void updateFavourite(Movie movie);*/
 
-    @Query("SELECT * FROM PopularMovies WHERE id = :id")
+    @Query("SELECT * FROM PopularMovies WHERE mMovieId = :id")
     Movie getMovieById(long id);
 
 
@@ -43,6 +43,6 @@ public interface PopularMoviesDao {
     @Delete
     void removeFavourite(Movie movie);
 
-    @Query("UPDATE PopularMovies SET mIsFav=1 WHERE mIsFav=0")
-    void updateFavourite();
+    @Query("UPDATE PopularMovies SET mIsFav=1 WHERE mMovieId = :id")
+    void updateFavourite(String id);
 }

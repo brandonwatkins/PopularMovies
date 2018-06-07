@@ -12,4 +12,10 @@
         app:showAsAction="ifRoom">
     </item>
 
+    <item
+        android:id="@+id/favourites"
+        android:title="@string/favourites"
+        app:showAsAction="ifRoom">
+    </item>
+
 </menu>
