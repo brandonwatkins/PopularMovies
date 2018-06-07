@@ -11,10 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.android.popularmovies.DetailActivity;
-import com.example.android.popularmovies.Movie;
+import com.example.android.popularmovies.Database.Movie;
 import com.example.android.popularmovies.R;
-import com.example.android.popularmovies.Tasks.RetrieveMoviesTask;
-import com.example.android.popularmovies.Tasks.RetrieveTrailersTask;
 import com.example.android.popularmovies.ViewHolders.ViewHolder;
 import com.squareup.picasso.Picasso;
 

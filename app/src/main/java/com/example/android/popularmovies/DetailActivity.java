@@ -3,17 +3,15 @@ package com.example.android.popularmovies;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.popularmovies.Adapters.MovieAdapter;
 import com.example.android.popularmovies.Adapters.ReviewsAdapter;
 import com.example.android.popularmovies.Adapters.TrailerAdapter;
-import com.example.android.popularmovies.Tasks.RetrieveMoviesTask;
+import com.example.android.popularmovies.Database.Movie;
 import com.example.android.popularmovies.Tasks.RetrieveReviewsTask;
 import com.example.android.popularmovies.Tasks.RetrieveTrailersTask;
 import com.squareup.picasso.Picasso;

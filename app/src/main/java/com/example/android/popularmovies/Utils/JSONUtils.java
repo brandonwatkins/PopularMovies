@@ -2,7 +2,7 @@ package com.example.android.popularmovies.Utils;
 
 import android.util.Log;
 
-import com.example.android.popularmovies.Movie;
+import com.example.android.popularmovies.Database.Movie;
 
 import org.json.JSONArray;
 import org.json.JSONException;
