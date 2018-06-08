@@ -27,12 +27,11 @@ public interface PopularMoviesDao {
     @Insert(onConflict = REPLACE)
     void addFavourite(Movie movie);
 
-   /* @Update
-    void updateFavourite(Movie movie);*/
+    @Update
+    void updateFavourite(Movie movie);
 
     @Query("SELECT * FROM PopularMovies WHERE mMovieId = :id")
-    Movie getMovieById(long id);
-
+    Movie getMovieById(int id);
 
     /*@Query("SELECT SUM(sessionLength) FROM StudySession WHERE sent=0")
     long getTotalWeeklyHours();
@@ -44,5 +43,5 @@ public interface PopularMoviesDao {
     void removeFavourite(Movie movie);
 
     @Query("UPDATE PopularMovies SET mIsFav=1 WHERE mMovieId = :id")
-    void updateFavourite(String id);
+    void updateDBFavourite(String id);
 }

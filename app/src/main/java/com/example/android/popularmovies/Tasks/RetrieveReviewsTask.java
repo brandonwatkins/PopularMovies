@@ -9,7 +9,7 @@ import com.example.android.popularmovies.Utils.NetworkUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class RetrieveReviewsTask extends AsyncTask<String, Void, ArrayList<String>> {
+public class RetrieveReviewsTask extends AsyncTask<Integer, Void, ArrayList<String>> {
 
     ReviewsAdapter mReviewsAdapter;
 
@@ -18,14 +18,14 @@ public class RetrieveReviewsTask extends AsyncTask<String, Void, ArrayList<Strin
     }
 
     @Override
-    protected ArrayList<String> doInBackground(String... params) {
+    protected ArrayList<String> doInBackground(Integer... params) {
 
         ArrayList<String> reviewArray = new ArrayList<>();
         JSONUtils jsonUtils = new JSONUtils();
 
         try {
             //Use the id passed in to retrieve the correct movie trailers
-            String responseFromHttpUrl = NetworkUtils.getResponseFromHttpUrl(NetworkUtils.buildReviewsUrl(params[0]));
+            String responseFromHttpUrl = NetworkUtils.getResponseFromHttpUrl(NetworkUtils.buildReviewsUrl(Integer.toString(params[0])));
             reviewArray = jsonUtils.parseReviewsJSON(responseFromHttpUrl);
         } catch (IOException o) {
             o.printStackTrace();

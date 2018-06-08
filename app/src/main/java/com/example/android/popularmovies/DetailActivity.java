@@ -73,7 +73,7 @@ public class DetailActivity extends AppCompatActivity {
         mUserRating.setText(String.valueOf(movie.getmUserRating()) + outOfTen);
         mPosterURL = movie.getmMoviePosterUrl();
 
-        String id = movie.getmMovieId();
+        int id = movie.getmMovieId();
 
         Log.d("DETAILS_ACTIVITY", "ID num:" + id);
 
@@ -117,8 +117,9 @@ public class DetailActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            new UpdateIsFavouriteTask(PopularMoviesDb.getDatabase(v.getContext())).execute();
             new AddToFavouritesTask(database).execute(movie);
+            new UpdateIsFavouriteTask(database).execute(movie.getmMovieId());
+            finish();
 
         }
 
