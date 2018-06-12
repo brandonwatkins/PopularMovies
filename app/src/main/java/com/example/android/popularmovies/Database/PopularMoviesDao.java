@@ -21,8 +21,11 @@ public interface PopularMoviesDao {
     //@Query("SELECT * FROM StudySession ORDER BY time")
     //LiveData<List<StudySession>> getAllStudySessions();
 
-    @Query("SELECT * FROM PopularMovies WHERE mIsFav!=1 ORDER BY mMovieId")
+    @Query("SELECT * FROM PopularMovies WHERE mIsFav=1 ORDER BY mMovieId")
     LiveData<List<Movie>> getFavourites();
+
+  /*  @Query("SELECT * FROM PopularMovies ORDER BY mMovieId")
+    LiveData<List<Movie>> getFavourites();*/
 
     @Insert(onConflict = REPLACE)
     void addFavourite(Movie movie);

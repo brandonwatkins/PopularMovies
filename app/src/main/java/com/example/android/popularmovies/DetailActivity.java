@@ -16,6 +16,7 @@ import com.example.android.popularmovies.Adapters.TrailerAdapter;
 import com.example.android.popularmovies.Database.Movie;
 import com.example.android.popularmovies.Database.PopularMoviesDb;
 import com.example.android.popularmovies.Tasks.AddToFavouritesTask;
+import com.example.android.popularmovies.Tasks.CheckIsFavouriteTask;
 import com.example.android.popularmovies.Tasks.RetrieveReviewsTask;
 import com.example.android.popularmovies.Tasks.RetrieveTrailersTask;
 import com.example.android.popularmovies.Tasks.UpdateIsFavouriteTask;
@@ -23,7 +24,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements isInDatabaseResponse {
 
     private static final String MOVIE_KEY = "movie_key";
 
@@ -34,6 +35,7 @@ public class DetailActivity extends AppCompatActivity {
     private ImageView mPoster;
     private String mPosterURL;
     private ImageButton mFavBtn;
+    private ImageButton mUnFavBtn;
 
     private TrailerAdapter mTrailerAdapter;
     private RecyclerView mTrailersRecyclerView;
@@ -42,6 +44,8 @@ public class DetailActivity extends AppCompatActivity {
     private RecyclerView mReviewsRecyclerView;
 
     PopularMoviesDb database;
+
+    private boolean isInFavDatabase;
 
 
     @Override
@@ -57,6 +61,7 @@ public class DetailActivity extends AppCompatActivity {
         mTrailersRecyclerView = findViewById(R.id.rvTrailers);
         mReviewsRecyclerView = findViewById(R.id.rvReviews);
         mFavBtn = findViewById(R.id.ibFavButton);
+        mUnFavBtn = findViewById(R.id.ibUnFavButton);
 
 
         ArrayList<String> mTrailers = new ArrayList<>();
@@ -105,6 +110,19 @@ public class DetailActivity extends AppCompatActivity {
         // Get reference to the apps database
         database = PopularMoviesDb.getDatabase(this);
 
+        CheckIsFavouriteTask checkIsFavouriteTask = new CheckIsFavouriteTask(database);
+
+        checkIsFavouriteTask.delegate = this;
+        checkIsFavouriteTask.execute(id);
+
+        if (isInFavDatabase == false) {
+            mFavBtn.setVisibility(View.GONE);
+            mUnFavBtn.setVisibility(View.VISIBLE);
+        } else {
+            mFavBtn.setVisibility(View.VISIBLE);
+            mUnFavBtn.setVisibility(View.GONE);
+        }
+
     }
 
 
@@ -124,4 +142,11 @@ public class DetailActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public void processFinish(Boolean output) {
+        isInFavDatabase = output;
+    }
+
+
 }

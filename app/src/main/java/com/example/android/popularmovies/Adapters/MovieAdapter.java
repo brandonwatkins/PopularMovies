@@ -28,6 +28,8 @@ public class MovieAdapter extends RecyclerView.Adapter<ViewHolder> {
     private Context mContext;
     private List<Movie> mMovies;
 
+    private boolean isFavourite;
+
     public MovieAdapter(Context context, List<Movie> movie) {
         this.mContext = context;
         this.mMovies = movie;
@@ -77,6 +79,10 @@ public class MovieAdapter extends RecyclerView.Adapter<ViewHolder> {
         //Add all the new data passed in into the ArrayList
         mMovies.addAll(data);
         notifyDataSetChanged();
+    }
+
+    public void deliverIsFav(boolean isFav) {
+        isFavourite = isFav;
     }
 
 }
