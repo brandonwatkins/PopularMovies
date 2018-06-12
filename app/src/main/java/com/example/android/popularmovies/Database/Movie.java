@@ -1,53 +1,69 @@
-package com.example.android.popularmovies;
+package com.example.android.popularmovies.Database;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
  * Movie class
+ *
+ * When creating the parcel I found help writing and reading a boolean from the link below
+ * Source: https://stackoverflow.com/questions/6201311/how-to-read-write-a-boolean-when-implementing-the-parcelable-interface
  */
+
+@Entity(tableName = "PopularMovies")
 public class Movie implements Parcelable {
 
-    private String mMovieId;
-    private String mOriginalTitle;
-    private String mMoviePosterUrl;
-    private String mPlotSynopsis;
-    private Double mUserRating;
-    private String mReleaseDate;
+    @PrimaryKey(autoGenerate = true)
+    public int mMovieId;
+    public String mOriginalTitle;
+    public String mMoviePosterUrl;
+    public String mPlotSynopsis;
+    public Double mUserRating;
+    public String mReleaseDate;
+    public Boolean mIsFav;
 
     public Movie() {}
 
+    @Ignore
     public Movie(String name, String imageUrl) {
         this.mOriginalTitle = name;
         this.mMoviePosterUrl = imageUrl;
     }
 
-    public Movie(String title, String posterUrl, String synopsis,
-                 Double rating, String date) {
+    @Ignore
+    public Movie(int id, String title, String posterUrl, String synopsis,
+                 Double rating, String date, Boolean fav) {
+        this.mMovieId = id;
         this.mOriginalTitle = title;
         this.mMoviePosterUrl = posterUrl;
         this.mPlotSynopsis = synopsis;
         this.mUserRating = rating;
         this.mReleaseDate = date;
+        this.mIsFav = fav;
     }
 
     private Movie(Parcel in){
-        mMovieId = in.readString();
+        mMovieId = in.readInt();
         mOriginalTitle = in.readString();
         mMoviePosterUrl = in.readString();
         mPlotSynopsis = in.readString();
         mUserRating = in.readDouble();
         mReleaseDate = in.readString();
+        mIsFav = in.readByte() != 0;
     }
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(mMovieId);
+        parcel.writeInt(mMovieId);
         parcel.writeString(mOriginalTitle);
         parcel.writeString(mMoviePosterUrl);
         parcel.writeString(mPlotSynopsis);
         parcel.writeDouble(mUserRating);
         parcel.writeString(mReleaseDate);
+        parcel.writeByte((byte) (mIsFav ? 1 : 0));
     }
 
     @Override
@@ -74,11 +90,19 @@ public class Movie implements Parcelable {
         return releaseYear;
     }
 
-    public String getmMovieId() {
+    public Boolean getmIsFav() {
+        return mIsFav;
+    }
+
+    public void setmIsFav(Boolean mIsFav) {
+        this.mIsFav = mIsFav;
+    }
+
+    public int getmMovieId() {
         return mMovieId;
     }
 
-    public void setmMovieId(String mMovieId) {
+    public void setmMovieId(int mMovieId) {
         this.mMovieId = mMovieId;
     }
 

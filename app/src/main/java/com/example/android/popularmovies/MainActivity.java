@@ -1,8 +1,11 @@
 package com.example.android.popularmovies;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,9 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.popularmovies.Adapters.MovieAdapter;
+import com.example.android.popularmovies.Database.Movie;
 import com.example.android.popularmovies.Tasks.RetrieveMoviesTask;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     //private GridView gridView;
     private RecyclerView mRecyclerView;
     private MovieAdapter mMovieAdapter;
+    private PopularMoviesViewModel popularMoviesViewModel;
     private TextView mEmptyView;
     public ArrayList<Movie> mMovies;
     private boolean isConnected;
@@ -59,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         mMovieAdapter = new MovieAdapter(this, mMovies);
         mRecyclerView.setAdapter(mMovieAdapter);
 
+
+
         //By default load most popular on start up
         getMostPopular();
 
@@ -83,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.popularity:
                 getMostPopular();
                 break;
+            case R.id.favourites:
+                getFavourites();
+                break;
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -125,5 +137,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    private void getFavourites() {
+
+        popularMoviesViewModel = ViewModelProviders.of(this).get(PopularMoviesViewModel.class);
+
+        popularMoviesViewModel.getFavouritesList().observe(this,
+                new Observer<List<Movie>>(){
+                    @Override
+                    public void onChanged(@Nullable List<Movie> movies){
+                        mMovieAdapter.deliverResults(movies);
+                    }
+
+                });
+    }
+
 
 }

@@ -2,7 +2,7 @@ package com.example.android.popularmovies.Utils;
 
 import android.util.Log;
 
-import com.example.android.popularmovies.Movie;
+import com.example.android.popularmovies.Database.Movie;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,12 +46,13 @@ public class JSONUtils {
 
                 //Create movie object from JSON
                 Movie movie = new Movie();
-                movie.setmMovieId(JSONMovie.optString("id", FALL_BACK_STRING));
+                movie.setmMovieId(Integer.parseInt(JSONMovie.optString("id", FALL_BACK_STRING)));
                 movie.setmOriginalTitle(JSONMovie.optString("original_title", FALL_BACK_STRING));
                 movie.setmMoviePosterUrl("http://image.tmdb.org/t/p/w185/" + JSONMovie.optString("poster_path", FALL_BACK_STRING));
                 movie.setmPlotSynopsis(JSONMovie.optString("overview", FALL_BACK_STRING));
                 movie.setmUserRating(JSONMovie.optDouble("vote_average", 0));
                 movie.setmReleaseDate(JSONMovie.optString("release_date", FALL_BACK_STRING));
+                movie.setmIsFav(false);
 
                 //Add the movie object to my List
                 movieArrayList.add(movie);

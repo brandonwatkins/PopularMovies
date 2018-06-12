@@ -11,10 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.android.popularmovies.DetailActivity;
-import com.example.android.popularmovies.Movie;
+import com.example.android.popularmovies.Database.Movie;
 import com.example.android.popularmovies.R;
-import com.example.android.popularmovies.Tasks.RetrieveMoviesTask;
-import com.example.android.popularmovies.Tasks.RetrieveTrailersTask;
 import com.example.android.popularmovies.ViewHolders.ViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -29,6 +27,8 @@ public class MovieAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     private Context mContext;
     private List<Movie> mMovies;
+
+    private boolean isFavourite;
 
     public MovieAdapter(Context context, List<Movie> movie) {
         this.mContext = context;
@@ -79,6 +79,10 @@ public class MovieAdapter extends RecyclerView.Adapter<ViewHolder> {
         //Add all the new data passed in into the ArrayList
         mMovies.addAll(data);
         notifyDataSetChanged();
+    }
+
+    public void deliverIsFav(boolean isFav) {
+        isFavourite = isFav;
     }
 
 }
