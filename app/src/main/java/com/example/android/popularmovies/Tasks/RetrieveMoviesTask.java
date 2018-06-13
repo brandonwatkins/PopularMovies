@@ -26,8 +26,8 @@ public class RetrieveMoviesTask extends AsyncTask<String, Object, List<Movie>> {
         JSONUtils jsonUtils = new JSONUtils();
 
         try {
-            //Use the parameter passed in (either top_rated or popular) to retrieve the correct
-            //list of movies
+            // Use the parameter passed in (either top_rated or popular) to retrieve the correct
+            // list of movies
             String responseFromHttpUrl = NetworkUtils.getResponseFromHttpUrl(NetworkUtils.buildUrl(params[0]));
             movieArray = jsonUtils.parseMoviesJSON(responseFromHttpUrl);
         } catch (IOException o) {
@@ -39,7 +39,7 @@ public class RetrieveMoviesTask extends AsyncTask<String, Object, List<Movie>> {
 
     @Override
     protected void onPostExecute(List<Movie> movies) {
-        //Call deliver results method return the results of the task
+        // Call deliver results method return the results of the task
         mMovieAdapter.deliverResults(movies);
 
     }

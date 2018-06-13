@@ -33,10 +33,10 @@ public class JSONUtils {
 
             List<Movie> movieArrayList = new ArrayList<>();
 
-            //Create the main JSON object from the JSON passed in
+            // Create the main JSON object from the JSON passed in
             JSONObject mainJSONObject = new JSONObject(JSONString);
 
-            //Create the results array
+            // Create the results array
             JSONArray resultsArray = mainJSONObject.getJSONArray("results");
 
 
@@ -54,7 +54,7 @@ public class JSONUtils {
                 movie.setmReleaseDate(JSONMovie.optString("release_date", FALL_BACK_STRING));
                 movie.setmIsFav(false);
 
-                //Add the movie object to my List
+                // Add the movie object to my List
                 movieArrayList.add(movie);
             }
 
@@ -68,19 +68,25 @@ public class JSONUtils {
         return null;
     }
 
+     /**
+     * Converts the JSON string received and returns a list of trailers
+     * @param JSONString
+     * @return trailerList
+     */
+
     public ArrayList<String> parseTrailersJSON (String JSONString) {
 
         try {
 
-            //Fall back string will produce a funny video
+            // Fall back string will produce a funny video
             String FALL_BACK_STRING = "bXZEP6OwKBQ";
 
             ArrayList<String> trailerList = new ArrayList<>();
 
-            //Create the main JSON object from the JSON passed in
+            // Create the main JSON object from the JSON passed in
             JSONObject mainJSONObject = new JSONObject(JSONString);
 
-            //Create the results array
+            // Create the results array
             JSONArray resultsArray = mainJSONObject.getJSONArray("youtube");
 
 
@@ -101,19 +107,24 @@ public class JSONUtils {
         return null;
     }
 
+    /**
+     * Converts the JSON string received and returns a list of reviews
+     * @param JSONString
+     * @return reviewList
+     */
     public ArrayList<String> parseReviewsJSON (String JSONString) {
 
         try {
 
-            //Fall back string will produce a funny video
+            // Fall back string will produce a funny video
             String FALL_BACK_STRING = "N/A";
 
             ArrayList<String> reviewList = new ArrayList<>();
 
-            //Create the main JSON object from the JSON passed in
+            // Create the main JSON object from the JSON passed in
             JSONObject mainJSONObject = new JSONObject(JSONString);
 
-            //Create the results array
+            // Create the results array
             JSONArray resultsArray = mainJSONObject.getJSONArray("results");
 
 

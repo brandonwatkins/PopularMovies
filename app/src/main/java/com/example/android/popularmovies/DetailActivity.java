@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -27,6 +26,7 @@ import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity implements isInDatabaseResponse {
 
+    // Key for movie object that is passed in
     private static final String MOVIE_KEY = "movie_key";
 
     private TextView mOriginalTitle;
@@ -44,6 +44,7 @@ public class DetailActivity extends AppCompatActivity implements isInDatabaseRes
     private ReviewsAdapter mReviewsAdapter;
     private RecyclerView mReviewsRecyclerView;
 
+    // App database
     PopularMoviesDb database;
 
     private boolean isInFavDatabase;
@@ -67,10 +68,11 @@ public class DetailActivity extends AppCompatActivity implements isInDatabaseRes
         mFavBtn = findViewById(R.id.ibFavButton);
         mUnFavBtn = findViewById(R.id.ibUnFavButton);
 
-
+        // ArrayLists that hold all the various Reviews and Trailers
         ArrayList<String> mTrailers = new ArrayList<>();
         ArrayList<String> mReviews = new ArrayList<>();
 
+        // Retrieve the movie object that was passed in
         Intent i = getIntent();
         Movie movie = i.getParcelableExtra(MOVIE_KEY);
 
@@ -86,40 +88,41 @@ public class DetailActivity extends AppCompatActivity implements isInDatabaseRes
         mUserRating.setText(String.valueOf(movie.getmUserRating()) + outOfTen);
         mPosterURL = movie.getmMoviePosterUrl();
 
-
-        Log.d("DETAILS_ACTIVITY", "ID num:" + id);
-
-        //Load the movies poster again using Picasso
+        // Load the movies poster again using Picasso
         Picasso.with(DetailActivity.this)
                 .load(mPosterURL)
                 .into(mPoster);
 
+
+        // Set up RecyclerViews
         mTrailersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mTrailerAdapter = new TrailerAdapter(this, mTrailers);
         mTrailersRecyclerView.setAdapter(mTrailerAdapter);
-
-        RetrieveTrailersTask retrieveTrailersTask = new RetrieveTrailersTask(mTrailerAdapter);
-        retrieveTrailersTask.execute(id);
 
         mReviewsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mReviewsAdapter = new ReviewsAdapter(this, mReviews);
         mReviewsRecyclerView.setAdapter(mReviewsAdapter);
 
-        RetrieveReviewsTask retrieveReviewsTask = new RetrieveReviewsTask(mReviewsAdapter);
-        retrieveReviewsTask.execute(id);
+        // Methods to retrieve the Reviews and Trailers
+        retrieveReviews(id);
+        retrieveTrailers(id);
 
+        // Set the onClickListeners for each button
         mFavBtn.setOnClickListener(new FavouritesOnClickListener(movie));
         mUnFavBtn.setOnClickListener(new UnFavouritesOnClickListener(movie));
 
-        CheckIsFavouriteTask checkIsFavouriteTask = new CheckIsFavouriteTask(database);
+    }
 
-        checkIsFavouriteTask.delegate = this;
-        checkIsFavouriteTask.execute(id);
+    private void retrieveReviews(int id) {
+        RetrieveReviewsTask retrieveReviewsTask = new RetrieveReviewsTask(mReviewsAdapter);
+        retrieveReviewsTask.execute(id);
+    }
 
-
-
+    private void retrieveTrailers(int id) {
+        RetrieveTrailersTask retrieveTrailersTask = new RetrieveTrailersTask(mTrailerAdapter);
+        retrieveTrailersTask.execute(id);
     }
 
 
@@ -169,7 +172,6 @@ public class DetailActivity extends AppCompatActivity implements isInDatabaseRes
         checkIsFavouriteTask.delegate = this;
         checkIsFavouriteTask.execute(id);
     }
-
 
     public void showCorrectButton() {
         if (isInFavDatabase) {

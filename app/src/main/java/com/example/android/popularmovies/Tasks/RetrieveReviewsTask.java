@@ -24,7 +24,7 @@ public class RetrieveReviewsTask extends AsyncTask<Integer, Void, ArrayList<Stri
         JSONUtils jsonUtils = new JSONUtils();
 
         try {
-            //Use the id passed in to retrieve the correct movie trailers
+            //Use the id passed in to retrieve the correct movie reviews
             String responseFromHttpUrl = NetworkUtils.getResponseFromHttpUrl(NetworkUtils.buildReviewsUrl(Integer.toString(params[0])));
             reviewArray = jsonUtils.parseReviewsJSON(responseFromHttpUrl);
         } catch (IOException o) {
@@ -36,7 +36,7 @@ public class RetrieveReviewsTask extends AsyncTask<Integer, Void, ArrayList<Stri
 
     @Override
     protected void onPostExecute(ArrayList<String> reviews) {
-        //Call deliver results method return the results of the task
+        // Call deliver results method return the results of the task
         mReviewsAdapter.deliverResults(reviews);
 
     }

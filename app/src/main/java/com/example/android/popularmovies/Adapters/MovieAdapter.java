@@ -54,14 +54,14 @@ public class MovieAdapter extends RecyclerView.Adapter<ViewHolder> {
 
                 Movie movie = mMovies.get(position);
 
-                //Create intent with movie object selected and pass it to DetailActivity
+                // Create intent with movie object selected and pass it to DetailActivity
                 Intent intent = new Intent(mContext, DetailActivity.class);
                 intent.putExtra(MOVIE_KEY, movie);
                 mContext.startActivity(intent);
             }
         });
 
-        //Picasso is used to load the movie poster url into the image view
+        // Picasso is used to load the movie poster url into the image view
         Picasso.with(mContext)
                 .load(mMovies.get(position).getmMoviePosterUrl())
                 .into(imageView);
@@ -74,9 +74,9 @@ public class MovieAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     public void deliverResults(List<Movie> data) {
-        //Remove existing data from the ArrayList
+        // Remove existing data from the ArrayList
         mMovies.clear();
-        //Add all the new data passed in into the ArrayList
+        // Add all the new data passed in into the ArrayList
         mMovies.addAll(data);
         notifyDataSetChanged();
     }

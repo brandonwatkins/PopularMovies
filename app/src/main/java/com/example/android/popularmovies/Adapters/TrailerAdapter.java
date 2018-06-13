@@ -20,7 +20,7 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerViewHolder> {
 
     private static final String LOG_TAG = TrailerAdapter.class.getSimpleName();
 
-    //Key for movie object
+    // Key for movie object
     private static final String MOVIE_KEY = "movie_key";
 
     private Context mContext;
@@ -75,9 +75,9 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerViewHolder> {
     }
 
     public void deliverResults(ArrayList<String> data) {
-        //Remove existing data from the ArrayList
+        // Remove existing data from the ArrayList
         mTrailers.clear();
-        //Add all the new data passed in into the ArrayList
+        // Add all the new data passed in into the ArrayList
         mTrailers.addAll(data);
         notifyDataSetChanged();
     }

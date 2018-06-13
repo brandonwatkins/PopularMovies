@@ -19,22 +19,15 @@ public final class NetworkUtils {
 
     private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
 
-    //Base movie URL that I append other information onto
+    // Base movie URL that I append other information onto
     private static final String MOVIE_URL = "http://api.themoviedb.org/3/movie";
 
-    // http://api.themoviedb.org/3/movie/383498/reviews?api_key=84e8c76a996104eafdee78fadd6e95db
-    // http://api.themoviedb.org/3/movie/popular?api_key=84e8c76a996104eafdee78fadd6e95db
-
-    //API Key
+    // API Key
     private static String API_KEY = BuildConfig.THE_GUARDIAN_API_KEY;
     private static String TRAILER_KEY = "trailers";
     private static String REVIEWS_KEY = "reviews";
 
-
-
     final static String API_PARAM = "api_key";
-   // final static String TRAILER_PARAM = "api_key";
-
 
     /**
      * Method is from Sunshine's NetworkUtils class.
