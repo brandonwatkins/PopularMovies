@@ -1,9 +1,7 @@
 package com.example.android.popularmovies.Tasks;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
-import com.example.android.popularmovies.Adapters.MovieAdapter;
 import com.example.android.popularmovies.Database.Movie;
 import com.example.android.popularmovies.Database.PopularMoviesDb;
 import com.example.android.popularmovies.isInDatabaseResponse;

@@ -18,14 +18,8 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 @Dao
 public interface PopularMoviesDao {
 
-    //@Query("SELECT * FROM StudySession ORDER BY time")
-    //LiveData<List<StudySession>> getAllStudySessions();
-
     @Query("SELECT * FROM PopularMovies WHERE mIsFav=1 ORDER BY mMovieId")
     LiveData<List<Movie>> getFavourites();
-
-  /*  @Query("SELECT * FROM PopularMovies ORDER BY mMovieId")
-    LiveData<List<Movie>> getFavourites();*/
 
     @Insert(onConflict = REPLACE)
     void addFavourite(Movie movie);
@@ -36,11 +30,6 @@ public interface PopularMoviesDao {
     @Query("SELECT * FROM PopularMovies WHERE mMovieId = :id")
     Movie getMovieById(int id);
 
-    /*@Query("SELECT SUM(sessionLength) FROM StudySession WHERE sent=0")
-    long getTotalWeeklyHours();
-
-    @Query("DELETE FROM StudySession WHERE sessionLength=0")
-    void purgeInvalidSessions();*/
 
     @Delete
     void removeFavourite(Movie movie);

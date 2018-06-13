@@ -27,14 +27,13 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    //Key for movie object
+    // Key for movie object
     private static final String MOVIE_KEY = "movie_key";
 
-    //Keys passed into the RetrieveMovies Task
+    // Keys passed into the RetrieveMovies Task
     private static final String POPULAR_KEY = "popular";
     private static final String TOP_RATED_KEY = "top_rated";
 
-    //private GridView gridView;
     private RecyclerView mRecyclerView;
     private MovieAdapter mMovieAdapter;
     private PopularMoviesViewModel popularMoviesViewModel;
@@ -47,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        // Code used to find out if the device has an internet connection.
+        // Source: https://developer.android.com/training/monitoring-device-state/connectivity-monitoring#java
         ConnectivityManager cm =
                 (ConnectivityManager) MainActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -58,18 +60,14 @@ public class MainActivity extends AppCompatActivity {
         mMovies = new ArrayList<>();
         mEmptyView = findViewById(R.id.tvEmpty);
 
-        //gridView = findViewById(R.id.gridView);
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
 
         mMovieAdapter = new MovieAdapter(this, mMovies);
         mRecyclerView.setAdapter(mMovieAdapter);
 
-
-
-        //By default load most popular on start up
+        // By default load most popular on start up
         getMostPopular();
-
 
     }
 
@@ -83,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //Load the correct list depending on the users choice
+        // Load the correct list depending on the users choice
         switch (id) {
             case R.id.rating:
                 getHighestRated();
@@ -101,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getHighestRated() {
-        //Start the AsyncTask that returns the top rated list
+        // Start the AsyncTask that returns the top rated list
         if (isConnected) {
             RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mMovieAdapter);
             retrieveMoviesTask.execute(TOP_RATED_KEY);
@@ -112,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             Toast errorToast = Toast.makeText(this, getString(R.string.internet_error), Toast.LENGTH_LONG);
             errorToast.show();
 
-            //Show "empty" TextView if no internet connection
+            // Show "empty" TextView if no internet connection
             mRecyclerView.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
 
@@ -120,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getMostPopular() {
-        //Start the AsyncTask that returns the most popular list
+        // Start the AsyncTask that returns the most popular list
         if (isConnected) {
             RetrieveMoviesTask retrieveMoviesTask = new RetrieveMoviesTask(mMovieAdapter);
             retrieveMoviesTask.execute(POPULAR_KEY);
@@ -139,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getFavourites() {
-
+        // ViewModel for RoomDb
         popularMoviesViewModel = ViewModelProviders.of(this).get(PopularMoviesViewModel.class);
 
         popularMoviesViewModel.getFavouritesList().observe(this,
@@ -151,6 +149,5 @@ public class MainActivity extends AppCompatActivity {
 
                 });
     }
-
 
 }

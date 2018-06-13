@@ -12,7 +12,7 @@ import com.example.android.popularmovies.Tasks.AddToFavouritesTask;
 import java.util.List;
 
 /**
- * ViewModel for the StudySessionList
+ * ViewModel for the PopularMovies
  * Created by Brandon Watkins
  */
 
@@ -40,22 +40,8 @@ public class PopularMoviesViewModel extends AndroidViewModel {
         return favouritesList;
     }
 
-/*    void removeFavourite(Movie m) {
-        new DeleteStudySessionTask(database).execute(m);
-    }*/
-
     void addMovie(Movie m) {
         Log.d(LOG_TAG, "Adding movie to favourites");
         new AddToFavouritesTask(database).execute(m);
     }
-
-/*    void startSession(StudySession s) {
-        Log.d("StudySpot", s.toString());
-        new StartStudySessionTask(database).execute(s);
-    }
-
-    void endSession(StudySession s) {
-        Log.d("StudySpot", s.toString());
-        new EndMostRecentStudySessionTask(database).execute();
-    }*/
 }
