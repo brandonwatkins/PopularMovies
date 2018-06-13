@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.popularmovies.Adapters.ReviewsAdapter;
 import com.example.android.popularmovies.Adapters.TrailerAdapter;
@@ -137,6 +138,8 @@ public class DetailActivity extends AppCompatActivity implements isInDatabaseRes
         public void onClick(View v) {
             new AddToFavouritesTask(database).execute(movie);
             new UpdateIsFavouriteTask(database).execute(movie.getmMovieId());
+            Toast addToast = Toast.makeText(DetailActivity.this, getString(R.string.add_toast), Toast.LENGTH_LONG);
+            addToast.show();
             finish();
 
         }
@@ -150,10 +153,12 @@ public class DetailActivity extends AppCompatActivity implements isInDatabaseRes
             this.movie = movie;
         }
 
+
         @Override
         public void onClick(View v) {
             new RemoveFromFavouritesTask(database).execute(movie);
-            //new UpdateIsFavouriteTask(database).execute(movie.getmMovieId());
+            Toast removeToast = Toast.makeText(DetailActivity.this, getString(R.string.remove_toast), Toast.LENGTH_LONG);
+            removeToast.show();
             finish();
 
         }

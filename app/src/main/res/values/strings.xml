@@ -8,6 +8,9 @@
     <string name="trailers_title">Trailers:</string>
     <string name="reviews_title">Reviews:</string>
     <string name="favourites">Favourites</string>
+    <string name="add_toast">Added movie to your Favourites</string>
+    <string name="remove_toast">Removed movie from your Favourites</string>
+
 
 
 
